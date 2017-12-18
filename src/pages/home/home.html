@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Lista Fácil</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<!-- <ion-content padding>
+  <h3>Ionic Menu Starter</h3>
+
+  <p>
+    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
+  </p>
+
+  <button ion-button secondary menuToggle>Toggle Menu</button>
+  
+</ion-content> -->
+<ion-content class="card-background-page">
+    <ion-card (click)="SubCategories()">
+      <img class="card-img" src="assets/imgs/food.jpg"/>
+      <div class="card-title">Alimentação</div>
+      <div class="card-subtitle">41 Estabelecimentos</div>
+    </ion-card>
+  
+    <ion-card>
+      <img class="card-img" src="assets/imgs/store.jpg"/>
+      <div class="card-title">Lojas</div>
+      <div class="card-subtitle">64 Estabelecimentos</div>
+    </ion-card>
+  
+    <ion-card>
+      <img class="card-img" src="assets/imgs/beauty.jpg"/>
+      <div class="card-title">Saúde e Beleza</div>
+      <div class="card-subtitle">72 Estabelecimentos</div>
+    </ion-card>
+  
+    <ion-card>
+      <img class="card-img" src="assets/imgs/info.jpg"/>
+      <div class="card-title">Informatica</div>
+      <div class="card-subtitle">28 Estabelecimentos</div>
+    </ion-card>
+  
+  </ion-content>
