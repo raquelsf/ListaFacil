@@ -2,31 +2,28 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { List } from 'ionic-angular/components/list/list';
 import { SubcategoriesPage } from '../subcategories/subcategories';
-
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-  items: Array<{name: string, image: string, qtd: string}>;
+  items:  Array<string>;
+  private url: string = "http://localhost:8000/categories";  
   
-  constructor(public navCtrl: NavController) {
-
-    this.items = [];
-    for (let i = 1; i < 4; i++) {
-      this.items.push({
-        name: 'Alimentação',
-        image: 'assets/imgs/food.jpg',
-        qtd: '55'
-      });
-    }
+  constructor(public navCtrl: NavController, public http: Http) {
+    
+    this.http.get(this.url).map(res => res.json())
+      .subscribe(data => {
+        this.items = data.dados;
+      }); 
 
   }
 
-  SubCategories($this) {
-    console.log($this);
+  SubCategories($id) {
     
-    this.navCtrl.push(SubcategoriesPage);
+    this.navCtrl.push(SubcategoriesPage, {id: $id});
   }
 }

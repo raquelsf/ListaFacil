@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { EstablishmentsPage } from '../establishments/establishments';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
 
 /**
  * Generated class for the SubcategoriesPage page.
@@ -15,28 +17,17 @@ import { EstablishmentsPage } from '../establishments/establishments';
   templateUrl: 'subcategories.html',
 })
 export class SubcategoriesPage{
-items: Array<{title: string, note: string, image: string}>;
-  
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-
-    this.items = [];
-    
-    for (let i = 1; i < 11; i++) {
-      this.items.push({
-        title: 'Item ' + i,
-        note: 'This is item #' + i,
-        image: 'assets/imgs/food.jpg'
-      });
-    }
+  items:  Array<string>;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
+    var id = navParams.get('id');
   }
-
-  Subcategories(event, item) {
-    console.log("event");
-    
-    this.navCtrl.push(SubcategoriesPage, {
-      item: item
-    });
+  ionViewDidLoad() {
+    this.http.get("http://localhost:8000/subcategories/list/"+ id).map(res => res.json())
+    .subscribe(data => {
+      this.items = data.dados;
+    }); 
   }
+ 
   Establishments() {
     this.navCtrl.push(EstablishmentsPage);
   }

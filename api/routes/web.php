@@ -14,3 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resources([
+    'categories' => 'CategoriesController',
+    'subcategories' => 'SubcategoriesController',
+    'establishments' => 'EstablishmentController'
+]);
+
+Route::group(['prefix' => 'subcategories'], function (){
+    Route::get('list/{id}', 'SubCategoriesController@list');
+});

@@ -16,7 +16,7 @@
 <ion-content padding>
   <ion-card ion-item *ngFor="let item of items" >
     <img class="card-image" src={{item.image}} />
-    <ion-card-content (click)="Subcategories($event, item)">
+    <ion-card-content >
       <ion-card-title>
         {{item.title}} 
       </ion-card-title>
