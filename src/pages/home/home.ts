@@ -9,10 +9,24 @@ import { SubcategoriesPage } from '../subcategories/subcategories';
   templateUrl: 'home.html'
 })
 export class HomePage {
+  items: Array<{name: string, image: string, qtd: string}>;
+  
+  constructor(public navCtrl: NavController) {
 
-  constructor(public navCtrl: NavController) {}
+    this.items = [];
+    for (let i = 1; i < 4; i++) {
+      this.items.push({
+        name: 'Alimentação',
+        image: 'assets/imgs/food.jpg',
+        qtd: '55'
+      });
+    }
 
-  SubCategories() {
+  }
+
+  SubCategories($this) {
+    console.log($this);
+    
     this.navCtrl.push(SubcategoriesPage);
   }
 }

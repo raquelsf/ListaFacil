@@ -15,31 +15,11 @@
   </p>
 
   <button ion-button secondary menuToggle>Toggle Menu</button>
-  
 </ion-content> -->
 <ion-content class="card-background-page">
-    <ion-card (click)="SubCategories()">
-      <img class="card-img" src="assets/imgs/food.jpg"/>
-      <div class="card-title">Alimentação</div>
-      <div class="card-subtitle">41 Estabelecimentos</div>
-    </ion-card>
-  
-    <ion-card>
-      <img class="card-img" src="assets/imgs/store.jpg"/>
-      <div class="card-title">Lojas</div>
-      <div class="card-subtitle">64 Estabelecimentos</div>
-    </ion-card>
-  
-    <ion-card>
-      <img class="card-img" src="assets/imgs/beauty.jpg"/>
-      <div class="card-title">Saúde e Beleza</div>
-      <div class="card-subtitle">72 Estabelecimentos</div>
-    </ion-card>
-  
-    <ion-card>
-      <img class="card-img" src="assets/imgs/info.jpg"/>
-      <div class="card-title">Informatica</div>
-      <div class="card-subtitle">28 Estabelecimentos</div>
-    </ion-card>
-  
-  </ion-content>
+  <ion-card ion-item *ngFor="let item of items" (click)="SubCategories(item.id)">
+    <img class="card-img" src={{item.image}}/>
+    <div class="card-title">{{item.name}}</div>
+    <div class="card-subtitle">{{item.qtd}}</div>
+  </ion-card>
+</ion-content>  

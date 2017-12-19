@@ -30,12 +30,9 @@ items: Array<{title: string, note: string, image: string}>;
     }
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SubcategoriesPage');
-  }
-
-  itemTapped(event, item) {
-    // That's right, we're pushing to ourselves!
+  Subcategories(event, item) {
+    console.log("event");
+    
     this.navCtrl.push(SubcategoriesPage, {
       item: item
     });
