@@ -13,10 +13,14 @@ class establishment extends Model
      * The attributes that are mass assignable.
      *
      * @var array
+     * 
      */
+
     protected $fillable = [
-        'name', 'image', 'note'
+        'id_subcategoria', 'id_endereco', 'nome', 'desc', 'facebook', 'instagram', 'email', 'imagem'
     ];
+
+    protected $table = 'estabelecimentos';
 
     /**
      * The attributes that should be mutated to dates.
@@ -33,4 +37,27 @@ class establishment extends Model
     protected $hidden = [
         'deleted_at', 
     ];
+
+    public function list(){
+        $Establishments = Self::get();
+        return $Establishments;
+    }
+    public function find($id){
+        $Establishment = Self::where('id', $id)->first();
+        return $Establishment;
+    }
+
+    public function store($data){
+        $Establishment = Self::Create($data);
+        return $Establishment;    
+    }
+
+    public function updateEstablishment($data, $id){
+        $Establishment = Self::Where('id', $id)->update($data);
+        return $Establishment;
+    }
+    public function deleteEstablishment($id){
+        $Establishment = Self::where('id', $id)->delete();
+        return $Establishment;
+    }
 }

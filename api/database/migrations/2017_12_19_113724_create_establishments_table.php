@@ -13,11 +13,16 @@ class CreateEstablishmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('establishments', function (Blueprint $table) {
+        Schema::create('estabelecimentos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('image');
-            $table->string('note');
+            $table->integer('id_subcategoria', false, true)->length(11);
+            $table->integer('id_endereco', false, true)->length(11);
+            $table->string('nome', 60);
+            $table->string('desc', 60);
+            $table->string('facebook', 60);
+            $table->string('instagram', 60);
+            $table->string('email', 60);
+            $table->string('imagem', 60);
             $table->timestamps();
             $table->softDeletes();
             
@@ -31,6 +36,6 @@ class CreateEstablishmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('establishments');
+        Schema::dropIfExists('estabelecimentos');
     }
 }

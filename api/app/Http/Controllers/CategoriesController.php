@@ -10,13 +10,22 @@ use Response;
 class CategoriesController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct(categories $categories){
+        $this->categories = $categories;
+    }
+    
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $Categories = categories::all();
+        $Categories = $this->categories->list(); 
         if(!($Categories) OR (sizeof($Categories) <= 0 )){
             $result = [
                 'status' =>'false',
@@ -49,7 +58,35 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $validator =  Validator::make($data, [   //Validação de campos
+            'nome' => 'required|', 
+            'imagem' => 'required|', 
+        ]);
+
+        if($validator->fails())
+        {
+            $result = Response::json([
+                'status' =>'false',
+                'message' => $validator->errors(),
+            ], 422);
+
+        } else{
+            $Categorie = $this->categories->store($data); 
+            if(!($Categorie) OR (sizeof($Categorie) <= 0 )){
+                $result = [
+                    'status' =>'false',
+                    'message' => 'Registro encontrado',
+                ];
+            } else{
+                $result = [
+                    'status' =>'true',
+                    'dados' => $Categorie,
+                ];
+            }
+        }
+        
+        return response()->json($result);
     }
 
     /**
@@ -60,7 +97,19 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-        //
+        $Categorie = $this->categories->find($id); 
+        if(!($Categorie) OR (sizeof($Categorie) <= 0 )){
+            $result = [
+                'status' =>'false',
+                'message' => 'Registro encontrado',
+            ];
+        } else{
+            $result = [
+                'status' =>'true',
+                'dados' => $Categorie,
+            ];
+        }
+        return response()->json($result);
     }
 
     /**

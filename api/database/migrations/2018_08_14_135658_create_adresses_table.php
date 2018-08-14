@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSubcategoriesTable extends Migration
+class CreateAdressesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,14 @@ class CreateSubcategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('subcategorias', function (Blueprint $table) {
+        Schema::create('enderecos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_categoria', false, true)->length(11);
-            $table->string('nome', 60);
+            $table->integer('id_rua', false, true)->length(11);
+            $table->integer('id_cidade', false, true)->length(11);
+            $table->integer('id_bairro', false, true)->length(11);
+            $table->string('cep', 15);
+            $table->string('numero', 10);
+            $table->string('complemento', 60);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -29,6 +33,6 @@ class CreateSubcategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subcategorias');
+        Schema::dropIfExists('enderecos');
     }
 }

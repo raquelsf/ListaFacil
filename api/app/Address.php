@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class categories extends Model
+class Address extends Model
 {
     use SoftDeletes;
     
@@ -15,8 +15,10 @@ class categories extends Model
      * @var array
      */
     protected $fillable = [
-        'nome', 'imagem'
+        'id_rua', 'id_cidade', 'id_bairro', 'cep', 'numero', 'complemento'
     ];
+
+    protected $table = 'enderecos';
 
     /**
      * The attributes that should be mutated to dates.
@@ -35,25 +37,25 @@ class categories extends Model
     ];
 
     public function list(){
-        $Categories = Self::get();
-        return $Categories;
+        $Address = Self::get();
+        return $Address;
     }
     public function find($id){
-        $Categorie = Self::where('id', $id)->first();
-        return $Categorie;
+        $Address = Self::where('id', $id)->first();
+        return $Address;
     }
 
     public function store($data){
-        $Categorie = Self::Create($data);
-        return $Categorie;    
+        $Address = Self::Create($data);
+        return $Address;    
     }
 
-    public function updateCategorie($data, $id){
-        $Categorie = Self::Where('id', $id)->update($data);
-        return $Categorie;
+    public function updateAddress($data, $id){
+        $Address = Self::Where('id', $id)->update($data);
+        return $Address;
     }
-    public function deleteCategorie($id){
-        $Categorie = Self::where('id', $id)->delete();
-        return $Categorie;
+    public function deleteAddress($id){
+        $Address = Self::where('id', $id)->delete();
+        return $Address;
     }
 }
