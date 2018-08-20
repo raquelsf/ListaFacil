@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\establishment;
-use App\Address;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\ImageManager;
 use Image;
+
+use App\establishment;
+use App\Address;
 
 class EstablishmentController extends Controller
 {
@@ -20,7 +21,7 @@ class EstablishmentController extends Controller
         $this->establishment = $establishment;
         $this->address = $Address;
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +29,7 @@ class EstablishmentController extends Controller
      */
     public function index()
     {
-        $Establishments = $this->establishment->list(); 
+        $Establishments = $this->establishment->list();
         if(!($Establishments) OR (sizeof($Establishments) <= 0 )){
             $result = [
                 'status' =>'false',
@@ -63,15 +64,15 @@ class EstablishmentController extends Controller
     {
         $data = $request->all();
         $validator =  Validator::make($data, [   //Validação de campos
-            'id_subcategoria' => 'required|', 
-            'nome' => 'required|', 
-            'desc' => 'required|', 
-            'facebook' => 'required|', 
-            'instagram' => 'required|', 
-            'email' => 'required|', 
-            'imagem' => 'required|', 
-            'id_rua' => 'required|', 
-            'id_cidade' => 'required|', 
+            'id_subcategoria' => 'required|',
+            'nome' => 'required|',
+            'desc' => 'required|',
+            'facebook' => 'required|',
+            'instagram' => 'required|',
+            'email' => 'required|',
+            'imagem' => 'required|',
+            'id_rua' => 'required|',
+            'id_cidade' => 'required|',
             'id_bairro' => 'required|',
             'cep' => 'required|',
             'numero'=> 'required|',
@@ -95,12 +96,13 @@ class EstablishmentController extends Controller
                 'complemento' => $data['complemento'],
             ];
 
-            $Address = $this->address->store($data_address); 
+            $Address = $this->address->store($data_address);
+
             $file = $request->file('imagem');
             $destinationPath = 'images/';
             $extension = $file->getClientOriginalExtension();
             $Name = rand(11111,99999);
-            $fileName = $Name.'.'.$extension; 
+            $fileName = $Name.'.'.$extension;
             $img = Image::make($file);
             $width = $img->width();
             $height = $img->height();
@@ -108,14 +110,14 @@ class EstablishmentController extends Controller
                 $img->resize(300, null, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
-                }); 
+                });
                 $img->resizeCanvas(300, 300, 'center', false, 'ffffff');
                 $img->save($destinationPath.$fileName);
             } else{
                 $img->resize(null, 300, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
-                }); 
+                });
                 $img->resizeCanvas(300, 300, 'center', false, 'ffffff');
                 $img->save($destinationPath.$fileName);
             }
@@ -132,7 +134,7 @@ class EstablishmentController extends Controller
                 'imagem' => $fileName,
             ];
 
-            $Establishment = $this->establishment->store($data_establishment); 
+            $Establishment = $this->establishment->store($data_establishment);
             if(!($Establishment) OR (sizeof($Establishment) <= 0 )){
                 $result = [
                     'status' =>'false',
@@ -145,7 +147,7 @@ class EstablishmentController extends Controller
                 ];
             }
         }
-        
+
         return response()->json($result);
     }
 

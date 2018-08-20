@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class categories extends Model
 {
     use SoftDeletes;
-    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -18,6 +18,7 @@ class categories extends Model
         'nome', 'imagem'
     ];
 
+    protected $table = "categorias";
     /**
      * The attributes that should be mutated to dates.
      *
@@ -31,7 +32,7 @@ class categories extends Model
      * @var array
      */
     protected $hidden = [
-        'deleted_at', 
+        'deleted_at',
     ];
 
     public function list(){
@@ -45,7 +46,7 @@ class categories extends Model
 
     public function store($data){
         $Categorie = Self::Create($data);
-        return $Categorie;    
+        return $Categorie;
     }
 
     public function updateCategorie($data, $id){

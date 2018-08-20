@@ -6,18 +6,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Response;
 
-use App\subcategories;
+use App\cities;
 
-class SubCategoriesController extends Controller
+class CitiesController extends Controller
 {
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(subcategories $subcategories){
-        $this->subcategories = $subcategories;
+    public function __construct(cities $cities){
+        $this->cities = cities;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -26,28 +27,6 @@ class SubCategoriesController extends Controller
     public function index()
     {
         //
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function list($id)
-    {
-        $SubCategories = subcategories::where('categorie_id', $id)->get();
-        if(!($SubCategories) OR (sizeof($SubCategories) <= 0 )){
-            $result = [
-                'status' =>'false',
-                'message' => 'Nenhum registro encontrado',
-            ];
-        } else{
-            $result = [
-                'status' =>'true',
-                'dados' => $SubCategories,
-            ];
-        }
-        return response()->json($result);
     }
 
     /**
@@ -70,7 +49,7 @@ class SubCategoriesController extends Controller
     {
       $data = $request->all();
       $validator =  Validator::make($data, [   //Validação de campos
-          'id_categoria' => 'required|',
+          'id_estado' => 'required|',
           'nome' => 'required|',
       ]);
 
@@ -82,16 +61,16 @@ class SubCategoriesController extends Controller
           ], 422);
 
       } else{
-          $Subcategorie = $this->subcategories->store($data);
-          if(!($Subcategorie) OR (sizeof($Subcategorie) <= 0 )){
+          $City = $this->cities->store($data);
+          if(!($City) OR (sizeof($City) <= 0 )){
               $result = [
                   'status' =>'false',
-                  'message' => 'Erro ao Cadastrar Subcategoria',
+                  'message' => 'Erro ao Cadastrar Cidade',
               ];
           } else{
               $result = [
                   'status' =>'true',
-                  'dados' => $Subcategorie,
+                  'dados' => $City,
               ];
           }
       }

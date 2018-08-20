@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\categories;
-
+use Illuminate\Support\Facades\Validator;
 use Response;
+
+use App\categories;
 
 class CategoriesController extends Controller
 {
@@ -17,7 +18,7 @@ class CategoriesController extends Controller
     public function __construct(categories $categories){
         $this->categories = $categories;
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -25,11 +26,11 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $Categories = $this->categories->list(); 
+        $Categories = $this->categories->list();
         if(!($Categories) OR (sizeof($Categories) <= 0 )){
             $result = [
                 'status' =>'false',
-                'message' => 'Nenhum registro encontrado',
+                'message' => 'Nenhum registro encontrado.',
             ];
         } else{
             $result = [
@@ -37,7 +38,7 @@ class CategoriesController extends Controller
                 'dados' => $Categories,
             ];
         }
-        return response()->json($result);
+        return $Categories;
     }
 
     /**
@@ -60,8 +61,8 @@ class CategoriesController extends Controller
     {
         $data = $request->all();
         $validator =  Validator::make($data, [   //Validação de campos
-            'nome' => 'required|', 
-            'imagem' => 'required|', 
+            'nome' => 'required|',
+            'imagem' => 'required|',
         ]);
 
         if($validator->fails())
@@ -72,7 +73,35 @@ class CategoriesController extends Controller
             ], 422);
 
         } else{
-            $Categorie = $this->categories->store($data); 
+          $file = $request->file('imagem');
+          $destinationPath = 'images/categorias';
+          $extension = $file->getClientOriginalExtension();
+          $Name = rand(11111,99999);
+          $fileName = $Name.'.'.$extension;
+          $img = Image::make($file);
+          $width = $img->width();
+          $height = $img->height();
+          if($width > $height){
+              $img->resize(300, null, function ($constraint) {
+                  $constraint->aspectRatio();
+                  $constraint->upsize();
+              });
+              $img->resizeCanvas(300, 300, 'center', false, 'ffffff');
+              $img->save($destinationPath.$fileName);
+          } else{
+              $img->resize(null, 300, function ($constraint) {
+                  $constraint->aspectRatio();
+                  $constraint->upsize();
+              });
+              $img->resizeCanvas(300, 300, 'center', false, 'ffffff');
+              $img->save($destinationPath.$fileName);
+          }
+
+          $data_categorie = [
+              'nome' => $data['nome'],
+              'imagem' => $fileName,
+          ];
+            $Categorie = $this->categories->store($data_categorie);
             if(!($Categorie) OR (sizeof($Categorie) <= 0 )){
                 $result = [
                     'status' =>'false',
@@ -85,7 +114,7 @@ class CategoriesController extends Controller
                 ];
             }
         }
-        
+
         return response()->json($result);
     }
 
@@ -97,7 +126,7 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-        $Categorie = $this->categories->find($id); 
+        $Categorie = $this->categories->find($id);
         if(!($Categorie) OR (sizeof($Categorie) <= 0 )){
             $result = [
                 'status' =>'false',

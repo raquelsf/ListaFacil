@@ -8,14 +8,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class subcategories extends Model
 {
     use SoftDeletes;
-    
+
+    protected $table = 'subcategorias';
+
       /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'categorie_id', 'image'
+        'id_categoria', 'nome'
     ];
 
     /**
@@ -31,6 +33,29 @@ class subcategories extends Model
      * @var array
      */
     protected $hidden = [
-        'deleted_at', 
+        'deleted_at',
     ];
+
+    public function list(){
+        $Subcategories = Self::get();
+        return $Subcategories;
+    }
+    public function find($id){
+        $Subcategories = Self::where('id', $id)->first();
+        return $Subcategories;
+    }
+
+    public function store($data){
+        $Subcategories = Self::Create($data);
+        return $Subcategories;
+    }
+
+    public function updateStreet($data, $id){
+        $Subcategories = Self::Where('id', $id)->update($data);
+        return $Subcategories;
+    }
+    public function deleteStreet($id){
+        $Subcategories = Self::where('id', $id)->delete();
+        return $Subcategories;
+    }
 }
