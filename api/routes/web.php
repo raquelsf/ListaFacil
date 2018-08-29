@@ -18,9 +18,24 @@ Route::get('/', function () {
 Route::resources([
     'categories' => 'CategoriesController',
     'subcategories' => 'SubcategoriesController',
-    'establishments' => 'EstablishmentController'
+    'establishments' => 'EstablishmentController',
+    'cities' => 'CitiesController',
+    'streets' => 'StreetController',
+    'neighborhoods'=> 'NeighborhoodsController',
 ]);
 
 Route::group(['prefix' => 'subcategories'], function (){
     Route::get('list/{id}', 'SubCategoriesController@list');
+});
+
+Route::group(['prefix' => 'cities'], function (){
+    Route::get('list/{id}', 'CitiesController@list');
+});
+
+Route::group(['prefix' => 'streets'], function (){
+    Route::get('list/{id}', 'StreetController@list');
+});
+
+Route::group(['prefix' => 'neighborhoods'], function (){
+    Route::get('list/{id}', 'NeighborhoodsController@list');
 });

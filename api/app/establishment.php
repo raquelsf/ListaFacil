@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class establishment extends Model
 {
     use SoftDeletes;
-    
+
       /**
      * The attributes that are mass assignable.
      *
      * @var array
-     * 
+     *
      */
 
     protected $fillable = [
@@ -35,11 +35,17 @@ class establishment extends Model
      * @var array
      */
     protected $hidden = [
-        'deleted_at', 
+        'deleted_at',
     ];
 
     public function list(){
-        $Establishments = Self::get();
+        $Establishments = Self::Join('enderecos', 'estabelecimentos.id_endereco', '=', 'enderecos.id')
+                            ->Join('subcategorias', 'estabelecimentos.id_subcategoria', '=', 'subcategorias.id')
+                            ->Join('categorias', 'subcategorias.id_categoria', '=', 'categorias.id')
+                            ->select(
+                                    'estabelecimentos.*', 
+                                    'categorias.nome as categoria')
+                            ->get();
         return $Establishments;
     }
     public function find($id){
@@ -49,7 +55,7 @@ class establishment extends Model
 
     public function store($data){
         $Establishment = Self::Create($data);
-        return $Establishment;    
+        return $Establishment;
     }
 
     public function updateEstablishment($data, $id){

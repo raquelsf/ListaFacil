@@ -31,14 +31,16 @@ class CategoriesController extends Controller
             $result = [
                 'status' =>'false',
                 'message' => 'Nenhum registro encontrado.',
+                'data' => ''
             ];
         } else{
             $result = [
                 'status' =>'true',
-                'dados' => $Categories,
+                'message' => 'Nenhum registro encontrado.',
+                'data' => $Categories,
             ];
         }
-        return $Categories;
+        return $result;
     }
 
     /**

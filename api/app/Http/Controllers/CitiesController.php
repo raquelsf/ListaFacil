@@ -122,4 +122,21 @@ class CitiesController extends Controller
     {
         //
     }
+    public function list(){
+      $Cities = $this->cities->list();
+      if(!($Cities) OR (sizeof($Cities) <= 0 )){
+          $result = [
+              'status' =>'false',
+              'message' => 'Nenhum registro encontrado.',
+              'data' => ''
+          ];
+      } else{
+          $result = [
+              'status' =>'true',
+              'message' => 'Nenhum registro encontrado.',
+              'data' => $Cities,
+          ];
+      }
+      return $result;
+    }
 }

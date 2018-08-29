@@ -15,7 +15,7 @@ class streets extends Model
    * @var array
    */
 
-  protected $table = 'Ruas';
+  protected $table = 'ruas';
 
   protected $fillable = [
       'nome',

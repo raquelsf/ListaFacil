@@ -34,14 +34,16 @@ class EstablishmentController extends Controller
             $result = [
                 'status' =>'false',
                 'message' => 'Nenhum registro encontrado',
+                'data' => ''
             ];
         } else{
             $result = [
                 'status' =>'true',
-                'dados' => $Establishments,
+                'message' => '',
+                'data' => $Establishments,
             ];
         }
-        return response()->json($result);
+        return $result;
     }
 
     /**

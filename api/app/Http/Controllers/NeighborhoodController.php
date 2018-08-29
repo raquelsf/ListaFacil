@@ -3,9 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\neighborhoods;
 
 class NeighborhoodController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct(neighborhoods $neighborhoods){
+        $this->neighborhoods = $neighborhoods;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -80,5 +90,23 @@ class NeighborhoodController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function list(){
+      $Neighborhoods = $this->neighborhoods->list();
+      if(!($Neighborhoods) OR (sizeof($Neighborhoods) <= 0 )){
+          $result = [
+              'status' =>'false',
+              'message' => 'Nenhum registro encontrado.',
+              'data' => ''
+          ];
+      } else{
+          $result = [
+              'status' =>'true',
+              'message' => 'Nenhum registro encontrado.',
+              'data' => $Neighborhoods,
+          ];
+      }
+      return $result;
     }
 }

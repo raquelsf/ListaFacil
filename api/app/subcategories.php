@@ -37,7 +37,13 @@ class subcategories extends Model
     ];
 
     public function list(){
-        $Subcategories = Self::get();
+        $Subcategories = Self::Join('categorias', 'subcategorias.id_categoria', 'categorias.id')
+                                ->select(
+                                        'subcategorias.id', 
+                                        'subcategorias.nome',
+                                        'categorias.nome as categoria'
+                                        )
+                                ->get();
         return $Subcategories;
     }
     public function find($id){

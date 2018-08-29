@@ -25,7 +25,21 @@ class SubCategoriesController extends Controller
      */
     public function index()
     {
-        //
+      $SubCategories = $this->subcategories->list();
+      if(!($SubCategories) OR (sizeof($SubCategories) <= 0 )){
+          $result = [
+              'status' =>'false',
+              'message' => 'Nenhum registro encontrado.',
+              'data' => ''
+          ];
+      } else{
+          $result = [
+              'status' =>'true',
+              'message' => 'Nenhum registro encontrado.',
+              'data' => $SubCategories,
+          ];
+      }
+      return $result;
     }
 
     /**

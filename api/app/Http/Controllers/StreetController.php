@@ -3,9 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Address;
+use App\street;
 
 class StreetController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct(street $street){
+        $this->street = $street;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -80,5 +90,23 @@ class StreetController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function list(){
+      $Street = $this->streets->list();
+      if(!($Street) OR (sizeof($Street) <= 0 )){
+          $result = [
+              'status' =>'false',
+              'message' => 'Nenhum registro encontrado.',
+              'data' => ''
+          ];
+      } else{
+          $result = [
+              'status' =>'true',
+              'message' => 'Nenhum registro encontrado.',
+              'data' => $Street,
+          ];
+      }
+      return $result;
     }
 }
