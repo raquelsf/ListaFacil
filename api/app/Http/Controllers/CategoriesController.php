@@ -108,16 +108,18 @@ class CategoriesController extends Controller
                 $result = [
                     'status' =>'false',
                     'message' => 'Registro encontrado',
+                    'data' => '',
                 ];
             } else{
                 $result = [
                     'status' =>'true',
-                    'dados' => $Categorie,
+                    'message' => '',
+                    'data' => $Categorie,
                 ];
             }
         }
 
-        return response()->json($result);
+        return $result;
     }
 
     /**
@@ -133,14 +135,16 @@ class CategoriesController extends Controller
             $result = [
                 'status' =>'false',
                 'message' => 'Registro encontrado',
+                'data' => ''
             ];
         } else{
             $result = [
                 'status' =>'true',
-                'dados' => $Categorie,
+                'message' => '',
+                'data' => $Categorie,
             ];
         }
-        return response()->json($result);
+        return $result;
     }
 
     /**

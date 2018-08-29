@@ -89,6 +89,7 @@ class EstablishmentController extends Controller
             ], 422);
 
         } else{
+            
             $data_address = [
                 'id_rua' => $data['id_rua'],
                 'id_cidade' => $data['id_cidade'],

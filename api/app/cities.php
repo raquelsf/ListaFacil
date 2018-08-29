@@ -15,7 +15,7 @@ class cities extends Model
    * @var array
    */
 
-  protected $table = 'Cidades';
+  protected $table = 'cidades';
 
   protected $fillable = [
       'id_estado', 'nome',

@@ -54,11 +54,13 @@ class SubCategoriesController extends Controller
             $result = [
                 'status' =>'false',
                 'message' => 'Nenhum registro encontrado',
+                'data' => '',
             ];
         } else{
             $result = [
                 'status' =>'true',
-                'dados' => $SubCategories,
+                'message' => '',
+                'data' => $SubCategories,
             ];
         }
         return response()->json($result);
@@ -101,16 +103,18 @@ class SubCategoriesController extends Controller
               $result = [
                   'status' =>'false',
                   'message' => 'Erro ao Cadastrar Subcategoria',
+                  'data' => '',
               ];
           } else{
               $result = [
                   'status' =>'true',
-                  'dados' => $Subcategorie,
+                  'message' => '',
+                  'data' => $Subcategorie,
               ];
           }
       }
 
-      return response()->json($result);
+      return $result;
     }
 
     /**
