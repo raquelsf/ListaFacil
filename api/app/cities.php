@@ -41,7 +41,7 @@ class cities extends Model
                       ->select(
                           'estados.sigla',
                           'cidades.nome',
-                          'cidades.id',
+                          'cidades.id'
                         )
                       ->get();
       return $Cities;
@@ -64,4 +64,21 @@ class cities extends Model
       $Cities = Self::where('id', $id)->delete();
       return $Cities;
   }
+  public function check($data){
+        if(isset($data['id'])){
+        $find = Self::where('id', $data['id'])->first();
+        if((isset($find)) && (sizeof($find) > 0)){
+            return $data['id'];
+        }
+        } else{
+            $find = Self::where('nome', $data)->first();
+            if((isset($find)) && (sizeof($find) > 0)){
+            return $find ->id;
+            } else{
+                $data_city['nome'] = $data;
+                $city = Self::create($data_city);
+                return $city->id;  
+            }
+        }
+    }
 }
