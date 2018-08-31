@@ -89,7 +89,21 @@ class NeighborhoodController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Neighborhoods = $this->deleteNeighborhood->list();
+        if(!($Neighborhoods) OR (sizeof($Neighborhoods) <= 0 )){
+            $result = [
+                'status' =>'false',
+                'message' => 'Bairro excluído',
+                'data' => ''
+            ];
+        } else{
+            $result = [
+                'status' =>'true',
+                'message' => 'Erro ao excluir',
+                'data' => $Neighborhoods,
+            ];
+        }
+        return $result;
     }
 
     public function list(){

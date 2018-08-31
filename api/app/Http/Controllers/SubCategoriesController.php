@@ -163,6 +163,20 @@ class SubCategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Subcategorie = $this->deleteSubcategorie->list();
+        if(!($Subcategorie) OR (sizeof($Subcategorie) <= 0 )){
+            $result = [
+                'status' =>'false',
+                'message' => 'Sub Categoria excluída',
+                'data' => ''
+            ];
+        } else{
+            $result = [
+                'status' =>'true',
+                'message' => 'Erro ao excluir',
+                'data' => $Subcategorie,
+            ];
+        }
+        return $result;
     }
 }

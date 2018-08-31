@@ -119,7 +119,21 @@ class StreetController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Street = $this->deleteStreet->list();
+        if(!($Street) OR (sizeof($Street) <= 0 )){
+            $result = [
+                'status' =>'false',
+                'message' => 'Rua excluída',
+                'data' => ''
+            ];
+        } else{
+            $result = [
+                'status' =>'true',
+                'message' => 'Erro ao excluir',
+                'data' => $Street,
+            ];
+        }
+        return $result;
     }
 
     public function list(){

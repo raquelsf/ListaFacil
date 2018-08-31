@@ -178,6 +178,20 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Categorie = $this->categories->deleteCategorie($id);
+        if(!($Categorie) OR (sizeof($Categorie) <= 0 )){
+            $result = [
+                'status' =>'false',
+                'message' => 'Categoria Excluída.',
+                'data' => ''
+            ];
+        } else{
+            $result = [
+                'status' =>'true',
+                'message' => 'Erro ao excluir.',
+                'data' => $Categorie,
+            ];
+        }
+        return $result;
     }
 }
