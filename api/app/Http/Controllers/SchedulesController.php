@@ -3,9 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Schedules;
 
 class SchedulesController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct(Schedules $Schedules){
+        $this->schedules = $Schedules;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -81,4 +90,29 @@ class SchedulesController extends Controller
     {
         //
     }
+     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function listEstablishment($id_establishment)
+    {
+      $Schedules = $this->schedules->list();
+      if(!($Schedules) OR (sizeof($Schedules) <= 0 )){
+          $result = [
+              'status' =>'false',
+              'message' => 'Nenhum registro encontrado.',
+              'data' => ''
+          ];
+      } else{
+          $result = [
+              'status' =>'true',
+              'message' => 'Nenhum registro encontrado.',
+              'data' => $Schedules,
+          ];
+      }
+      return $result;
+    }
+    
 }

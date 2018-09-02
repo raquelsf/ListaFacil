@@ -44,7 +44,8 @@ class establishment extends Model
                             ->Join('categorias', 'subcategorias.id_categoria', '=', 'categorias.id')
                             ->select(
                                     'estabelecimentos.*', 
-                                    'categorias.nome as categoria')
+                                    'categorias.nome as categoria'
+                                    )
                             ->get();
         return $Establishments;
     }

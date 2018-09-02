@@ -57,4 +57,21 @@ class categories extends Model
         $Categorie = Self::where('id', $id)->delete();
         return $Categorie;
     }
+    public function check($data){
+        if(isset($data['id'])){
+        $find = Self::where('id', $data['id'])->first();
+        if((isset($find)) && (sizeof($find) > 0)){
+            return $data['id'];
+        }
+        } else{
+            $find = Self::where('nome', $data)->first();
+            if((isset($find)) && (sizeof($find) > 0)){
+            return $find ->id;
+            } else{
+                $data_categorie['nome'] = $data;
+                $categorie = Self::create($data_categorie);
+                return $categorie->id;  
+            }
+        }
+    }
 }

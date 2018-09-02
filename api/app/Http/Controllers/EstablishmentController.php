@@ -9,6 +9,9 @@ use Image;
 
 use App\establishment;
 use App\Address;
+use App\cities;
+use App\neighborhoods;
+use App\states;
 
 class EstablishmentController extends Controller
 {
@@ -17,9 +20,12 @@ class EstablishmentController extends Controller
      *
      * @return void
      */
-    public function __construct(establishment $establishment, Address $Address){
+    public function __construct(establishment $establishment, Address $Address, cities $cities, neighborhoods $neighborhoods, states $states){
         $this->establishment = $establishment;
         $this->address = $Address;
+        $this->cities = $cities;
+        $this->neighborhoods = $neighborhoods;
+        $this->states = $states;
     }
 
     /**
@@ -89,10 +95,14 @@ class EstablishmentController extends Controller
             ], 422);
 
         } else{
+            $street = $this->street->check($data['street']);    
+            $neighborhoods = $this->neighborhoods->check($data['neighborhood']);    
+            $cities = $this->cities->check($data['cities']);    
+            
             $data_address = [
-                'id_rua' => $data['id_rua'],
-                'id_cidade' => $data['id_cidade'],
-                'id_bairro' => $data['id_bairro'],
+                'id_rua' => $street,
+                'id_cidade' => $cities,
+                'id_bairro' => $neighborhoods,
                 'cep' => $data['cep'],
                 'numero' => $data['numero'],
                 'complemento' => $data['complemento'],

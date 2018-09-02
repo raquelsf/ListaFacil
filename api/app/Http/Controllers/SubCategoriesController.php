@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Response;
 
 use App\subcategories;
+use App\categories;
 
 class SubCategoriesController extends Controller
 {
@@ -15,8 +16,9 @@ class SubCategoriesController extends Controller
      *
      * @return void
      */
-    public function __construct(subcategories $subcategories){
+    public function __construct(subcategories $subcategories, categories $categories){
         $this->subcategories = $subcategories;
+        $this->categories = $categories;
     }
     /**
      * Display a listing of the resource.
@@ -54,11 +56,13 @@ class SubCategoriesController extends Controller
             $result = [
                 'status' =>'false',
                 'message' => 'Nenhum registro encontrado',
+                'data' => '',
             ];
         } else{
             $result = [
                 'status' =>'true',
-                'dados' => $SubCategories,
+                'message' => '',
+                'data' => $SubCategories,
             ];
         }
         return response()->json($result);
@@ -96,21 +100,25 @@ class SubCategoriesController extends Controller
           ], 422);
 
       } else{
+          $categorie = $this->categories->check($data['categorie']);
+          $data['id_categoria'] = $categorie;
           $Subcategorie = $this->subcategories->store($data);
           if(!($Subcategorie) OR (sizeof($Subcategorie) <= 0 )){
               $result = [
                   'status' =>'false',
                   'message' => 'Erro ao Cadastrar Subcategoria',
+                  'data' => '',
               ];
           } else{
               $result = [
                   'status' =>'true',
-                  'dados' => $Subcategorie,
+                  'message' => '',
+                  'data' => $Subcategorie,
               ];
           }
       }
 
-      return response()->json($result);
+      return $result;
     }
 
     /**

@@ -59,4 +59,21 @@ class neighborhoods extends Model
       $Neighborhoods = Self::where('id', $id)->delete();
       return $Neighborhoods;
   }
+  public function check($data){
+    if(isset($data['id'])){
+    $find = Self::where('id', $data['id'])->first();
+    if((isset($find)) && (sizeof($find) > 0)){
+        return $data['id'];
+    }
+    } else{
+        $find = Self::where('nome', $data)->first();
+        if((isset($find)) && (sizeof($find) > 0)){
+        return $find ->id;
+        } else{
+            $data_neighborhood['nome'] = $data;
+            $neighborhood = Self::create($data_neighborhood);
+            return $neighborhood->id;  
+        }
+    }
+}
 }

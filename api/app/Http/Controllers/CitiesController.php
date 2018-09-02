@@ -66,16 +66,18 @@ class CitiesController extends Controller
               $result = [
                   'status' =>'false',
                   'message' => 'Erro ao Cadastrar Cidade',
+                  'data' => '',
               ];
           } else{
               $result = [
-                  'status' =>'true',
-                  'dados' => $City,
+                  'status' =>'true', 
+                  'message' => '',
+                  'data' => $City,
               ];
           }
       }
 
-      return response()->json($result);
+      return $result;
     }
 
     /**

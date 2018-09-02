@@ -44,7 +44,37 @@ class StreetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $validator =  Validator::make($data, [   //Validação de campos
+           
+            'nome' => 'required|',
+        ]);
+  
+        if($validator->fails())
+        {
+            $result = Response::json([
+                'status' =>'false',
+                'message' => $validator->errors(),
+            ], 422);
+  
+        } else{
+            $street = $this->street->store($data);
+            if(!($street) OR (sizeof($street) <= 0 )){
+                $result = [
+                    'status' =>'false',
+                    'message' => 'Erro ao Cadastrar Rua',
+                    'data' => ''
+                ];
+            } else{
+                $result = [
+                    'status' =>'true',
+                    'message' => '',
+                    'data' => $street,
+                ];
+            }
+        }
+  
+        return $result;
     }
 
     /**
@@ -109,4 +139,5 @@ class StreetController extends Controller
       }
       return $result;
     }
+
 }

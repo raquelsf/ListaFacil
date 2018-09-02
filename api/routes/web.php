@@ -39,3 +39,8 @@ Route::group(['prefix' => 'streets'], function (){
 Route::group(['prefix' => 'neighborhoods'], function (){
     Route::get('list', 'NeighborhoodsController@list');
 });
+
+Route::group(['prefix' => 'schedules'], function (){
+    Route::get('list/{id}', 'SchedulesController@listEstablishment');
+});
+
