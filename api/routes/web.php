@@ -25,17 +25,17 @@ Route::resources([
 ]);
 
 Route::group(['prefix' => 'subcategories'], function (){
-    Route::get('list/{id}', 'SubCategoriesController@list');
+    Route::get('list', 'SubCategoriesController@list');
 });
 
 Route::group(['prefix' => 'cities'], function (){
-    Route::get('list/{id}', 'CitiesController@list');
+    Route::get('list', 'CitiesController@list');
 });
 
 Route::group(['prefix' => 'streets'], function (){
-    Route::get('list/{id}', 'StreetController@list');
+    Route::get('list', 'StreetController@list');
 });
 
 Route::group(['prefix' => 'neighborhoods'], function (){
-    Route::get('list/{id}', 'NeighborhoodsController@list');
+    Route::get('list', 'NeighborhoodsController@list');
 });
