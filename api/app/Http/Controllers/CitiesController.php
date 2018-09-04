@@ -16,7 +16,7 @@ class CitiesController extends Controller
      * @return void
      */
     public function __construct(cities $cities){
-        $this->cities = cities;
+        $this->cities = $cities;
     }
 
     /**

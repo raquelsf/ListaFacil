@@ -37,11 +37,9 @@ class cities extends Model
       'deleted_at',
   ];
   public function list(){
-      $Cities = Self::Join('estados', 'estados.id', '=', 'cidades.id_estado')
-                      ->select(
-                          'estados.sigla',
-                          'cidades.nome',
-                          'cidades.id'
+      $Cities = Self::select(
+                          'nome as text',
+                          'id'
                         )
                       ->get();
       return $Cities;

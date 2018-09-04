@@ -21,7 +21,7 @@ Route::resources([
     'establishments' => 'EstablishmentController',
     'cities' => 'CitiesController',
     'streets' => 'StreetController',
-    'neighborhoods'=> 'NeighborhoodsController',
+    'neighborhoods'=> 'NeighborhoodController',
 ]);
 
 Route::group(['prefix' => 'subcategories'], function (){
@@ -29,18 +29,18 @@ Route::group(['prefix' => 'subcategories'], function (){
 });
 
 Route::group(['prefix' => 'cities'], function (){
-    Route::get('list/{id}', 'CitiesController@list');
+    Route::get('list/select', 'CitiesController@list');
 });
 
 Route::group(['prefix' => 'streets'], function (){
-    Route::get('list/{id}', 'StreetController@list');
+    Route::get('list/select', 'StreetController@list');
 });
 
 Route::group(['prefix' => 'neighborhoods'], function (){
-    Route::get('list/{id}', 'NeighborhoodsController@list');
+    Route::get('list/select', 'NeighborhoodController@list');
 });
 
 Route::group(['prefix' => 'schedules'], function (){
-    Route::get('list/{id}', 'SchedulesController@listEstablishment');
+    Route::get('list/select', 'SchedulesController@listEstablishment');
 });
 

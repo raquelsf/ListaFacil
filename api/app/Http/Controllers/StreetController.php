@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Address;
-use App\street;
+use App\streets;
 
 class StreetController extends Controller
 {
@@ -13,8 +13,8 @@ class StreetController extends Controller
      *
      * @return void
      */
-    public function __construct(street $street){
-        $this->street = $street;
+    public function __construct(streets $streets){
+        $this->streets = $streets;
     }
     /**
      * Display a listing of the resource.
@@ -58,7 +58,7 @@ class StreetController extends Controller
             ], 422);
   
         } else{
-            $street = $this->street->store($data);
+            $street = $this->streets->store($data);
             if(!($street) OR (sizeof($street) <= 0 )){
                 $result = [
                     'status' =>'false',
@@ -119,7 +119,7 @@ class StreetController extends Controller
      */
     public function destroy($id)
     {
-        $Street = $this->deleteStreet->list();
+        $Street = $this->streets->deleteStreet->list();
         if(!($Street) OR (sizeof($Street) <= 0 )){
             $result = [
                 'status' =>'false',

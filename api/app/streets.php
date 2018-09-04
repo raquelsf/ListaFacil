@@ -38,7 +38,11 @@ class streets extends Model
   ];
 
   public function list(){
-      $Streets = Self::get();
+      $Streets = Self::select(
+                        'nome as text',
+                        'id'
+                    )
+                    ->get();
       return $Streets;
   }
   public function find($id){
