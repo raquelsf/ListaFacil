@@ -38,7 +38,10 @@ class streets extends Model
   ];
 
   public function list(){
-      $Streets = Self::get();
+      $Streets = Self::select(
+                          'nome as text',
+                          'id'
+                        )->get();
       return $Streets;
   }
   public function find($id){
@@ -59,7 +62,7 @@ class streets extends Model
       $Streets = Self::where('id', $id)->delete();
       return $Streets;
   }
-  
+
   public function check($data){
     if(isset($data['id'])){
       $find = Self::where('id', $data['id'])->first();
@@ -73,7 +76,7 @@ class streets extends Model
         } else{
             $data_street['nome'] = $data;
             $street = Self::create($data_street);
-            return $street->id;  
+            return $street->id;
         }
     }
 }

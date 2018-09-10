@@ -39,8 +39,9 @@ class subcategories extends Model
     public function list(){
         $Subcategories = Self::Join('categorias', 'subcategorias.id_categoria', 'categorias.id')
                                 ->select(
-                                        'subcategorias.id', 
-                                        'subcategorias.nome',
+                                        'subcategorias.id',
+                                        'subcategorias.nome as text',
+                                        'subcategorias.nome as nome',
                                         'categorias.nome as categoria'
                                         )
                                 ->get();

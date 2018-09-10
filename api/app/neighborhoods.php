@@ -38,7 +38,10 @@ class neighborhoods extends Model
   ];
 
   public function list(){
-      $Neighborhoods = Self::get();
+      $Neighborhoods = Self::select(
+                              'nome as text',
+                              'id'
+                            )->get();
       return $Neighborhoods;
   }
   public function find($id){
@@ -72,7 +75,7 @@ class neighborhoods extends Model
         } else{
             $data_neighborhood['nome'] = $data;
             $neighborhood = Self::create($data_neighborhood);
-            return $neighborhood->id;  
+            return $neighborhood->id;
         }
     }
 }

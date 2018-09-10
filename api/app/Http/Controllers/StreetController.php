@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Address;
-use App\street;
+use App\streets;
 
 class StreetController extends Controller
 {
@@ -13,8 +13,8 @@ class StreetController extends Controller
      *
      * @return void
      */
-    public function __construct(street $street){
-        $this->street = $street;
+    public function __construct(streets $streets){
+        $this->streets = $streets;
     }
     /**
      * Display a listing of the resource.
@@ -46,19 +46,19 @@ class StreetController extends Controller
     {
         $data = $request->all();
         $validator =  Validator::make($data, [   //Validação de campos
-           
+
             'nome' => 'required|',
         ]);
-  
+
         if($validator->fails())
         {
             $result = Response::json([
                 'status' =>'false',
                 'message' => $validator->errors(),
             ], 422);
-  
+
         } else{
-            $street = $this->street->store($data);
+            $street = $this->streets->store($data);
             if(!($street) OR (sizeof($street) <= 0 )){
                 $result = [
                     'status' =>'false',
@@ -73,7 +73,7 @@ class StreetController extends Controller
                 ];
             }
         }
-  
+
         return $result;
     }
 

@@ -16,7 +16,7 @@ class CitiesController extends Controller
      * @return void
      */
     public function __construct(cities $cities){
-        $this->cities = cities;
+        $this->cities = $cities;
     }
 
     /**
@@ -70,7 +70,7 @@ class CitiesController extends Controller
               ];
           } else{
               $result = [
-                  'status' =>'true', 
+                  'status' =>'true',
                   'message' => '',
                   'data' => $City,
               ];
@@ -135,7 +135,7 @@ class CitiesController extends Controller
       } else{
           $result = [
               'status' =>'true',
-              'message' => 'Nenhum registro encontrado.',
+              'message' => '',
               'data' => $Cities,
           ];
       }

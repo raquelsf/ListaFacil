@@ -39,8 +39,7 @@ class cities extends Model
   public function list(){
       $Cities = Self::Join('estados', 'estados.id', '=', 'cidades.id_estado')
                       ->select(
-                          'estados.sigla',
-                          'cidades.nome',
+                          'cidades.nome as text',
                           'cidades.id'
                         )
                       ->get();
@@ -77,7 +76,7 @@ class cities extends Model
             } else{
                 $data_city['nome'] = $data;
                 $city = Self::create($data_city);
-                return $city->id;  
+                return $city->id;
             }
         }
     }

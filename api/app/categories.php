@@ -36,9 +36,16 @@ class categories extends Model
     ];
 
     public function list(){
-        $Categories = Self::get();
+        $Categories = Self::select(
+                        'categorias.nome as text',
+                        'categorias.nome as nome',
+                        'categorias.id'
+                      )
+                    ->get();
         return $Categories;
     }
+
+
     public function find($id){
         $Categorie = Self::where('id', $id)->first();
         return $Categorie;
@@ -70,7 +77,7 @@ class categories extends Model
             } else{
                 $data_categorie['nome'] = $data;
                 $categorie = Self::create($data_categorie);
-                return $categorie->id;  
+                return $categorie->id;
             }
         }
     }
