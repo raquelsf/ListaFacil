@@ -57,11 +57,11 @@ class subcategories extends Model
         return $Subcategories;
     }
 
-    public function updateStreet($data, $id){
+    public function updateSubcategorie($data, $id){
         $Subcategories = Self::Where('id', $id)->update($data);
         return $Subcategories;
     }
-    public function deleteStreet($id){
+    public function deleteSubcategorie($id){
         $Subcategories = Self::where('id', $id)->delete();
         return $Subcategories;
     }

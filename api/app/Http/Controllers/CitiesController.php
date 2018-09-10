@@ -122,7 +122,21 @@ class CitiesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Cities = $this->deleteCities->list();
+        if(!($Cities) OR (sizeof($Cities) <= 0 )){
+            $result = [
+                'status' =>'false',
+                'message' => 'Ciadade excluída',
+                'data' => ''
+            ];
+        } else{
+            $result = [
+                'status' =>'true',
+                'message' => 'Erro ao excluir',
+                'data' => $Cities,
+            ];
+        }
+        return $result;
     }
     public function list(){
       $Cities = $this->cities->list();

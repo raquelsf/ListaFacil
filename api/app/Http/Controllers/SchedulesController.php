@@ -96,9 +96,9 @@ class SchedulesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function listEstablishment($id_establishment)
+    public function list($id_establishment)
     {
-      $Schedules = $this->schedules->list();
+      $Schedules = $this->schedules->listEstablishment($id_establishment);
       if(!($Schedules) OR (sizeof($Schedules) <= 0 )){
           $result = [
               'status' =>'false',

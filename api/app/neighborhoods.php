@@ -38,10 +38,12 @@ class neighborhoods extends Model
   ];
 
   public function list(){
-      $Neighborhoods = Self::select(
-                              'nome as text',
-                              'id'
-                            )->get();
+
+      $Neighborhoods =Self::select(
+                        'nome as text',
+                        'id'
+                    )
+                    ->get();
       return $Neighborhoods;
   }
   public function find($id){
@@ -54,11 +56,11 @@ class neighborhoods extends Model
       return $Neighborhoods;
   }
 
-  public function updateStreet($data, $id){
+  public function updateNeighborhood($data, $id){
       $Neighborhoods = Self::Where('id', $id)->update($data);
       return $Neighborhoods;
   }
-  public function deleteStreet($id){
+  public function deleteNeighborhood($id){
       $Neighborhoods = Self::where('id', $id)->delete();
       return $Neighborhoods;
   }

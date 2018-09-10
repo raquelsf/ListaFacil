@@ -28,9 +28,6 @@ Route::group(['prefix' => 'subcategories'], function (){
     Route::get('list', 'SubCategoriesController@list');
 });
 
-Route::group(['prefix' => 'subcategories'], function (){
-    Route::get('list/select', 'SubCategoriesController@list');
-});
 Route::group(['prefix' => 'categories'], function (){
     Route::get('list/select', 'CategoriesController@list');
 });
@@ -43,9 +40,9 @@ Route::group(['prefix' => 'streets'], function (){
 });
 
 Route::group(['prefix' => 'neighborhoods'], function (){
-    Route::get('list/select ', 'NeighborhoodController@list');
+    Route::get('list/select', 'NeighborhoodController@list');
 });
 
 Route::group(['prefix' => 'schedules'], function (){
-    Route::get('list/{id}', 'SchedulesController@listEstablishment');
+    Route::get('list/select', 'SchedulesController@listEstablishment');
 });

@@ -151,16 +151,18 @@ class EstablishmentController extends Controller
                 $result = [
                     'status' =>'false',
                     'message' => 'Registro encontrado',
+                    'data' => '',
                 ];
             } else{
                 $result = [
                     'status' =>'true',
-                    'dados' => $Establishment,
+                    'message' => '',
+                    'data' => $Establishment,
                 ];
             }
         }
 
-        return response()->json($result);
+        return $result;
     }
 
     /**
@@ -205,6 +207,20 @@ class EstablishmentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Establishments = $this->deleteEstablishment->list();
+        if(!($Establishments) OR (sizeof($Establishments) <= 0 )){
+            $result = [
+                'status' =>'false',
+                'message' => 'Estabelecimento excluído',
+                'data' => ''
+            ];
+        } else{
+            $result = [
+                'status' =>'true',
+                'message' => 'Erro ao excluir',
+                'data' => $Establishments,
+            ];
+        }
+        return $result;
     }
 }
