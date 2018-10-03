@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
+import { PlacesPage } from '../places/places';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { EstablishmentsPage } from '../establishments-list/establishments';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 /**
- * Generated class for the SubcategoriesPage page.
+ * Generated class for the EstablishmentsPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -13,10 +13,10 @@ import 'rxjs/add/operator/map';
 
 @IonicPage()
 @Component({
-  selector: 'page-subcategories',
-  templateUrl: 'subcategories.html',
+  selector: 'page-establishments',
+  templateUrl: 'establishments.html',
 })
-export class SubcategoriesPage{
+export class EstablishmentsPage {
   items:  Array<string>;
   id: any;
   nome: string;
@@ -27,7 +27,7 @@ export class SubcategoriesPage{
     this.nome = this.navParams.get('nome');
   }
   ionViewDidLoad() {
-    this.http.get("http://localhost:8000/subcategories/list/"+this.id).map(res => res.json())
+    this.http.get("http://localhost:8000/establishments/list/"+this.id).map(res => res.json())
     .subscribe(data => {
       if(data.status == "true"){
         this.vazio = false;
@@ -35,14 +35,12 @@ export class SubcategoriesPage{
       }else{
         this.vazio = true;
       }
-     
     }); 
-
   }
  
-  Establishments(id, nome) {
-    this.navCtrl.push(EstablishmentsPage, {id: id, nome: nome});
+  Establishments(id) {
+    this.navCtrl.push(PlacesPage, {id: id});
   }
-
   
+
 }

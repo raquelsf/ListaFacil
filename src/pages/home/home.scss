@@ -1,23 +1,24 @@
 page-home {
-
+    ion-grid {
+        background : #e0e0e0;
+    }
 }
+
 .card-background-page {
     ion-card {
+    color: grey;
+  
     position: relative;
     text-align: center;
     }
 
     .card-img{
-        filter: blur(3px);
     }
 
     .card-title {
-    position: absolute;
-    top: 36%;
-    font-size: 5.0em;
-    width: 100%;
+    font-size: 1.0em;
     font-weight: bold;
-    color: #fff;
+    color: rgb(0, 0, 0);
     }
 
     .card-subtitle {

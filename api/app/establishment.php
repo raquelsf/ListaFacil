@@ -49,8 +49,29 @@ class establishment extends Model
                             ->get();
         return $Establishments;
     }
+    public function listFavorites($user_id){
+        $Establishments = Self::Join('favoritos', 'favoritos.id_estabelecimento', '=', 'estabelecimentos.id')
+                                ->Join('horarios', 'horarios.id_estabelecimento', '=', 'estabelecimentos.id')
+                                ->where('favoritos.id_usuario', '=', $user_id)
+                                ->get();
+        return $Establishments;
+    }
+    public function listSubCategorie($id){
+        $Establishments = Self::Join('horarios', 'horarios.id_estabelecimento', '=', 'estabelecimentos.id')
+                                ->Join('subcategorias', 'estabelecimentos.id_subcategoria', '=', 'subcategorias.id')
+                                ->select('estabelecimentos.*', 
+                                        'horarios.aberto',
+                                        'horarios.fechado',
+                                        'horarios.dia'
+                                        )
+                                ->where('id_subcategoria', '=', $id)
+                                ->get();
+        return $Establishments;
+    }
     public function find($id){
-        $Establishment = Self::where('id', $id)->first();
+        $Establishment = Self::Join('horarios', 'horarios.id_estabelecimento', '=', 'estabelecimentos.id')
+                            ->where('estabelecimentos.id', $id)
+                            ->first();
         return $Establishment;
     }
 

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { SubcategoriesPage } from '../subcategories/subcategories';
+
 /**
- * Generated class for the EstablishmentsPage page.
+ * Generated class for the LoginPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -10,16 +10,16 @@ import { SubcategoriesPage } from '../subcategories/subcategories';
 
 @IonicPage()
 @Component({
-  selector: 'page-establishments',
-  templateUrl: 'establishments.html',
+  selector: 'page-login',
+  templateUrl: 'login.html',
 })
-export class EstablishmentsPage {
+export class LoginPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad EstablishmentsPage');
+    console.log('ionViewDidLoad LoginPage');
   }
 
 }

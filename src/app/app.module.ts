@@ -6,7 +6,12 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { SubcategoriesPage } from '../pages/subcategories/subcategories';
-import { EstablishmentsPage } from '../pages/establishments/establishments';
+import { EstablishmentsPage } from '../pages/establishments-list/establishments';
+import { PlacesPage } from '../pages/places/places';
+import { BasicPage } from '../pages/login/login-modal';
+import { PromotionsPage } from '../pages/promotions/promotions';
+
+import { FavoritesPage } from '../pages/favorites/favorites';
 
 import 'rxjs/add/operator/map';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -20,6 +25,10 @@ import { HttpModule } from '@angular/http';
     ListPage,
     SubcategoriesPage,
     EstablishmentsPage,
+    PlacesPage,
+    FavoritesPage,
+    BasicPage,
+    PromotionsPage
   ],
   imports: [
     BrowserModule,
@@ -32,7 +41,11 @@ import { HttpModule } from '@angular/http';
     HomePage,
     ListPage,
     SubcategoriesPage,
-    EstablishmentsPage
+    EstablishmentsPage,
+    PlacesPage,
+    FavoritesPage,
+    BasicPage,
+    PromotionsPage
   ],
   providers: [
     StatusBar,

@@ -15,10 +15,11 @@ class CreateAdressesTable extends Migration
     {
         Schema::create('enderecos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_rua', false, true)->length(11);
-            $table->integer('id_cidade', false, true)->length(11);
-            $table->integer('id_bairro', false, true)->length(11);
             $table->string('cep', 15);
+            $table->string('estado');
+            $table->string('cidade');
+            $table->string('bairro');
+            $table->string('rua');
             $table->string('numero', 10);
             $table->string('complemento', 60);
             $table->timestamps();

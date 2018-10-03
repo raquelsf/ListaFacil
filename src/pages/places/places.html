@@ -1,0 +1,103 @@
+<!--
+  Generated template for the PlacesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{nome}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-card>
+      <img src="../../assets/imgs/{{imagem}}">
+      <ion-fab right top>
+        <button ion-fab>
+          <ion-icon name="pin"></ion-icon>
+        </button>
+      </ion-fab>
+    
+      <ion-item>
+        <ion-icon name="ios-restaurant-outline" item-start large></ion-icon>
+        <h2>{{nome}}</h2>
+        <p>{{desc}}</p>
+      </ion-item>
+    
+      <ion-item>
+        <ion-icon name="ios-time-outline" item-start large ></ion-icon>
+        <h2>{{status}}</h2>
+        <p>Funcionamento de {{aberto}} ás {{fechado}}</p>
+      </ion-item>
+      <ion-item>
+        <ion-grid>
+          <ion-row col-12>
+            <ion-col col-3></ion-col>
+            <ion-col col-6>
+              <span item-start>
+                <ion-icon name="ios-star-outline" class="checked"></ion-icon>
+                <ion-icon name="ios-star-outline" class="checked"></ion-icon>
+                <ion-icon name="ios-star-outline" class="checked"></ion-icon>
+                <ion-icon name="ios-star-outline"></ion-icon>
+                <ion-icon name="ios-star-outline"></ion-icon>
+              </span>
+              <span item-start>(38)</span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item>
+        <ion-grid>
+          <ion-row col-12>
+            <ion-col col-3></ion-col>
+            <ion-col col-6>
+              <ion-icon name="ios-call-outline"></ion-icon> (31) 9 3921 - 2731
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>  
+      <ion-item>
+        <h2>Comentários</h2>
+        <ion-list *ngFor="let comentario of comentarios">
+          <ion-item>
+            <ion-avatar item-start>
+              <img src="../../assets/imgs/{{comentario.imagem}}">
+            </ion-avatar>
+            <h2>{{comentario.usuario}}</h2>
+            <p>{{comentario.comentario}}</p>
+          </ion-item>
+        </ion-list>
+      </ion-item>
+      <ion-item *ngIf="logado == false">
+        <p>É necessario estar logado para comentar. </p>
+        <p><a (click)="openModal({id: id})">Clique aqui para logar</a></p>
+        
+      </ion-item>
+      <ion-list *ngIf="logado == true">
+        <ion-item>
+          <ion-label stacked>Comentar</ion-label>
+          <ion-avatar item-start>
+            <img src="../../assets/imgs/avatar3.png">
+          </ion-avatar>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+      </ion-list>
+      <ion-item> 
+          <ion-grid>
+              <ion-row col-12>
+                <ion-col col-9></ion-col>
+                <ion-col col-3>
+                  <a href="{{facebook}}"><ion-icon name="logo-facebook"></ion-icon></a>
+                  <a href="{{instagram}}"><ion-icon name="logo-instagram"></ion-icon></a>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+        
+      </ion-item>
+    </ion-card>
+</ion-content>
+

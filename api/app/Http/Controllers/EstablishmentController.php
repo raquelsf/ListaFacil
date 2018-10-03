@@ -4,14 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 use Intervention\Image\ImageManager;
 use Image;
 
 use App\establishment;
 use App\Address;
-use App\cities;
-use App\neighborhoods;
-use App\states;
 
 class EstablishmentController extends Controller
 {
@@ -20,12 +18,9 @@ class EstablishmentController extends Controller
      *
      * @return void
      */
-    public function __construct(establishment $establishment, Address $Address, cities $cities, neighborhoods $neighborhoods, states $states){
+    public function __construct(establishment $establishment, Address $Address){
         $this->establishment = $establishment;
         $this->address = $Address;
-        $this->cities = $cities;
-        $this->neighborhoods = $neighborhoods;
-        $this->states = $states;
     }
 
     /**
@@ -53,6 +48,83 @@ class EstablishmentController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function list($id)
+    {
+        $Establishments = $this->establishment->listSubCategorie($id);
+        if(!($Establishments) OR (sizeof($Establishments) <= 0 )){
+            $result = [
+                'status' =>'false',
+                'message' => 'Nenhum registro encontrado',
+                'data' => ''
+            ];
+        } else{
+            $now = new Carbon();
+            $day = $now->dayOfWeek;
+            $now->subHours(3);
+            foreach($Establishments as $key=>$value){
+                if($day == $value->dia){
+                    if($now->toTimeString() >= $value->aberto && $now->toTimeString() <= $value->fechado){
+                        $value->status = 'Aberto';
+                    }else{
+                        $value->status = 'Fechado';
+                    }
+                }else{
+                    $value->status = '-';
+                }
+            }
+            $result = [
+                'status' =>'true',
+                'message' => '',
+                'data' => $Establishments,
+            ];
+        }
+        return $result;
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function listFavorites($user_id)
+    {
+        $user_id = 1;
+        $Establishments = $this->establishment->listFavorites($user_id);
+        if(!($Establishments) OR (sizeof($Establishments) <= 0 )){
+            $result = [
+                'status' =>'false',
+                'message' => 'Nenhum registro encontrado',
+                'data' => ''
+            ];
+        } else{
+            $now = new Carbon();
+            $day = $now->dayOfWeek;
+            $now->subHours(3);
+            foreach($Establishments as $key=>$value){
+                if($day == $value->dia){
+                    if($now->toTimeString() >= $value->aberto && $now->toTimeString() <= $value->fechado){
+                        $value->status = 'Aberto';
+                    }else{
+                        $value->status = 'Fechado';
+                    }
+                }else{
+                    $value->status = '-';
+                }
+            }
+            $result = [
+                'status' =>'true',
+                'message' => '',
+                'data' => $Establishments,
+            ];
+        }
+        return $result;
+    }
+
+    
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -79,9 +151,10 @@ class EstablishmentController extends Controller
             'instagram' => 'required|',
             'email' => 'required|',
             'imagem' => 'required|',
-            'id_rua' => 'required|',
-            'id_cidade' => 'required|',
-            'id_bairro' => 'required|',
+            'rua' => 'required|',
+            'estado' => 'required|',
+            'cidade' => 'required|',
+            'bairro' => 'required|',
             'cep' => 'required|',
             'numero'=> 'required|',
             'complemento' => 'required|',
@@ -95,14 +168,11 @@ class EstablishmentController extends Controller
             ], 422);
 
         } else{
-            $street = $this->street->check($data['street']);    
-            $neighborhoods = $this->neighborhoods->check($data['neighborhood']);    
-            $cities = $this->cities->check($data['cities']);    
-            
             $data_address = [
-                'id_rua' => $street,
-                'id_cidade' => $cities,
-                'id_bairro' => $neighborhoods,
+                'estado' => $data['estado'],
+                'rua' => $data['rua'],
+                'cidade' => $data['cidade'],
+                'bairro' => $data['bairro'],
                 'cep' => $data['cep'],
                 'numero' => $data['numero'],
                 'complemento' => $data['complemento'],
@@ -173,7 +243,33 @@ class EstablishmentController extends Controller
      */
     public function show($id)
     {
-        //
+        $Establishments = $this->establishment->find($id);
+        if(!($Establishments) OR (sizeof($Establishments) <= 0 )){
+            $result = [
+                'status' =>'false',
+                'message' => 'Nenhum registro encontrado',
+                'data' => ''
+            ];
+        } else{
+            $now = new Carbon();
+            $day = $now->dayOfWeek;
+            $now->subHours(3);
+            if($Establishments->dia ){
+                if($now->toTimeString() >= $Establishments->aberto && $now->toTimeString() <= $Establishments->fechado){
+                    $Establishments->status = 'Aberto';
+                }else{
+                    $Establishments->status = 'Fechado';
+                }
+            }else{
+                $Establishments->status = '-';
+            }
+            $result = [
+                'status' =>'true',
+                'message' => '',
+                'data' => $Establishments,
+            ];
+        }
+        return $result;
     }
 
     /**

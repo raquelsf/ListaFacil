@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { List } from 'ionic-angular/components/list/list';
 import { SubcategoriesPage } from '../subcategories/subcategories';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -17,13 +16,12 @@ export class HomePage {
     
     this.http.get(this.url).map(res => res.json())
       .subscribe(data => {
-        this.items = data.dados;
+        this.items = data.data;
       }); 
 
   }
 
-  SubCategories($id) {
-    
-    this.navCtrl.push(SubcategoriesPage, {id: $id});
+  SubCategories(id, nome) {
+    this.navCtrl.push(SubcategoriesPage, {id: id, nome: nome});
   }
 }

@@ -51,7 +51,7 @@ class SubCategoriesController extends Controller
      */
     public function list($id)
     {
-        $SubCategories = subcategories::where('categorie_id', $id)->get();
+        $SubCategories = $this->subcategories->listCategorie($id);
         if(!($SubCategories) OR (sizeof($SubCategories) <= 0 )){
             $result = [
                 'status' =>'false',

@@ -39,7 +39,8 @@ class categories extends Model
         $Categories = Self::select(
                         'categorias.nome as text',
                         'categorias.nome as nome',
-                        'categorias.id'
+                        'categorias.id',
+                        'categorias.imagem'
                       )
                     ->get();
         return $Categories;

@@ -7,23 +7,28 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>subcategories</ion-title>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button> 
+    <ion-title>{{nome}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-  <ion-card ion-item *ngFor="let item of items" >
-    <img class="card-image" src={{item.image}} />
-    <ion-card-content >
-      <ion-card-title>
-        {{item.title}} 
-      </ion-card-title>
-      <p>
-        {{item.note}}
-      </p>
-    </ion-card-content>
-  <button ion-button (click)="Establishments($event, item)">Ver mais...</button>
-  </ion-card>
+<ion-content>
+  <ion-item-group *ngIf="vazio == false">
+    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+    <ion-item *ngFor="let item of items" (click)="Establishments(item.id, item.nome)" >  
+      <ion-grid>
+        <ion-row>
+          <ion-col col-11>{{item.nome}}</ion-col>
+          <ion-col col-1><ion-icon name="arrow-forward"></ion-icon></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-item-group>
+  <ion-item *ngIf="vazio == true">
+    Não temos nada por aqui ainda.
+  </ion-item>
 </ion-content>

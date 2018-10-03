@@ -35,7 +35,19 @@ class subcategories extends Model
     protected $hidden = [
         'deleted_at',
     ];
-
+    
+    public function listCategorie($id){
+        $Subcategories = Self::Join('categorias', 'subcategorias.id_categoria', 'categorias.id')
+                                ->select(
+                                        'subcategorias.id',
+                                        'subcategorias.nome as text',
+                                        'subcategorias.nome as nome',
+                                        'categorias.nome as categoria'
+                                        )
+                                ->where('id_categoria', $id)        
+                                ->get();
+        return $Subcategories;
+    }
     public function list(){
         $Subcategories = Self::Join('categorias', 'subcategorias.id_categoria', 'categorias.id')
                                 ->select(

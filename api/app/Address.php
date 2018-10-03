@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Address extends Model
 {
     use SoftDeletes;
-    
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'id_rua', 'id_cidade', 'id_bairro', 'cep', 'numero', 'complemento'
+        'cep', 'estado', 'cidade', 'bairro', 'rua', 'numero', 'complemento'
     ];
 
     protected $table = 'enderecos';
@@ -33,7 +33,7 @@ class Address extends Model
      * @var array
      */
     protected $hidden = [
-        'deleted_at', 
+        'deleted_at',
     ];
 
     public function list(){
@@ -47,7 +47,7 @@ class Address extends Model
 
     public function store($data){
         $Address = Self::Create($data);
-        return $Address;    
+        return $Address;
     }
 
     public function updateAddress($data, $id){
