@@ -18,7 +18,7 @@
       <img src="../../assets/imgs/{{imagem}}">
       <ion-fab right top>
         <button ion-fab>
-          <ion-icon name="pin"></ion-icon>
+          <ion-icon name="ios-star-outline"></ion-icon>
         </button>
       </ion-fab>
     
@@ -72,9 +72,9 @@
           </ion-item>
         </ion-list>
       </ion-item>
-      <ion-item *ngIf="logado == false">
+      <ion-item *ngIf="logado == false" text-center>
         <p>É necessario estar logado para comentar. </p>
-        <p><a (click)="openModal({id: id})">Clique aqui para logar</a></p>
+        <p ><a (click)="openModal({id: id})">Clique aqui para logar</a></p>
         
       </ion-item>
       <ion-list *ngIf="logado == true">
@@ -89,10 +89,16 @@
       <ion-item> 
           <ion-grid>
               <ion-row col-12>
-                <ion-col col-9></ion-col>
-                <ion-col col-3>
-                  <a href="{{facebook}}"><ion-icon name="logo-facebook"></ion-icon></a>
-                  <a href="{{instagram}}"><ion-icon name="logo-instagram"></ion-icon></a>
+                <ion-col col-12>
+                  <button ion-button icon-start class="instagram">
+                    <ion-icon name="logo-instagram"></ion-icon>
+                    Instagram
+                  </button>
+                  <button ion-button icon-start>
+                    <ion-icon name="logo-facebook"></ion-icon>
+                    Facebook
+                  </button>
+                  <!-- <a href="{{instagram}}"><ion-icon name="logo-instagram"></ion-icon></a> -->
                 </ion-col>
               </ion-row>
             </ion-grid>

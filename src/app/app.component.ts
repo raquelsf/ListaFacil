@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { FavoritesPage } from '../pages/favorites/favorites';
 import { PromotionsPage } from '../pages/promotions/promotions';
+import { ConfigurationPage } from '../pages/configuration/configuration';
 
 @Component({
   templateUrl: 'app.html'
@@ -26,7 +27,7 @@ export class MyApp {
       { title: 'Home', component: HomePage, icon: 'ios-home-outline' },
       { title: 'Promoções', component: PromotionsPage, icon: 'logo-usd' },
       { title: 'Favoritos', component: FavoritesPage, icon: 'ios-star-outline' },
-      { title: 'Configurações', component: ListPage, icon: 'md-settings' }
+      { title: 'Configurações', component: ConfigurationPage, icon: 'md-settings' }
     ];
 
   }

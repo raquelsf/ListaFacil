@@ -67,6 +67,8 @@ export class PlacesPage {
  
 
   openModal() {
+    this.logado = true;
+
     const modal = this.modalCtrl.create(BasicPage);
     modal.present();
   }

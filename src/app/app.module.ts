@@ -10,6 +10,7 @@ import { EstablishmentsPage } from '../pages/establishments-list/establishments'
 import { PlacesPage } from '../pages/places/places';
 import { BasicPage } from '../pages/login/login-modal';
 import { PromotionsPage } from '../pages/promotions/promotions';
+import { ConfigurationPage } from '../pages/configuration/configuration';
 
 import { FavoritesPage } from '../pages/favorites/favorites';
 
@@ -28,7 +29,8 @@ import { HttpModule } from '@angular/http';
     PlacesPage,
     FavoritesPage,
     BasicPage,
-    PromotionsPage
+    PromotionsPage,
+    ConfigurationPage
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ import { HttpModule } from '@angular/http';
     PlacesPage,
     FavoritesPage,
     BasicPage,
-    PromotionsPage
+    PromotionsPage,
+    ConfigurationPage
   ],
   providers: [
     StatusBar,
