@@ -31,7 +31,6 @@ Route::group(['prefix' => 'establishments'], function (){
     
 });
 
-
 Route::group(['prefix' => 'categories'], function (){
     Route::get('list/select', 'CategoriesController@list');
 });
@@ -39,3 +38,5 @@ Route::group(['prefix' => 'categories'], function (){
 Route::group(['prefix' => 'schedules'], function (){
     Route::get('list/select', 'SchedulesController@listEstablishment');
 });
+
+Auth::routes(); 

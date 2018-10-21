@@ -27,7 +27,8 @@ export class MyApp {
       { title: 'Home', component: HomePage, icon: 'ios-home-outline' },
       { title: 'Promoções', component: PromotionsPage, icon: 'logo-usd' },
       { title: 'Favoritos', component: FavoritesPage, icon: 'ios-star-outline' },
-      { title: 'Configurações', component: ConfigurationPage, icon: 'md-settings' }
+      { title: 'Configurações', component: ConfigurationPage, icon: 'md-settings' },
+      { title: 'Sair', component: ConfigurationPage, icon: 'md-settings' },
     ];
 
   }
