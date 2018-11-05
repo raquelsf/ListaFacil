@@ -7,9 +7,9 @@
 <ion-header>
 
   <ion-navbar>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Favoritos</ion-title>
   </ion-navbar>
 
@@ -18,15 +18,15 @@
 
 <ion-content padding>
   <ion-list>
-      <ion-item *ngFor="let item of items">
-        <ion-thumbnail item-start>
-          <img src="../../assets/imgs/{{item.imagem}}">
-        </ion-thumbnail>
-        <h2>{{item.desc}}</h2>
+    <ion-item *ngFor="let item of items">
+      <ion-thumbnail item-start>
+        <img src="http://listfacil.com/api/public/images/{{item.imagem}}">
+      </ion-thumbnail>
+      <h2>{{item.desc}}</h2>
       <p>{{item.status}}</p>
-        <button ion-button clear item-end  (click)="Establishments(item.id)">
-            <ion-icon name="arrow-forward"></ion-icon>
-        </button>
-      </ion-item>
-    </ion-list>
+      <button ion-button clear item-end (click)="Establishments(item.id)">
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
 </ion-content>

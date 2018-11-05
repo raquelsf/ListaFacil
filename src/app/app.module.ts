@@ -19,6 +19,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpModule } from '@angular/http';
 
+import { Facebook } from '@ionic-native/facebook';
+import { HttpClientModule } from '@angular/common/http';
+
+import { SearchPipe } from '../pipes/search/search';
+import { SortPipe } from '../pipes/sort/sort';
 @NgModule({
   declarations: [
     MyApp,
@@ -30,12 +35,15 @@ import { HttpModule } from '@angular/http';
     FavoritesPage,
     BasicPage,
     PromotionsPage,
-    ConfigurationPage
+    ConfigurationPage,
+    SearchPipe,
+    SortPipe
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpModule,
+    HttpClientModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -53,6 +61,7 @@ import { HttpModule } from '@angular/http';
   providers: [
     StatusBar,
     SplashScreen,
+    Facebook,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

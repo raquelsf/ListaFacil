@@ -18,8 +18,8 @@
 
 <ion-content>
   <ion-item-group *ngIf="vazio == false">
-    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-    <ion-item *ngFor="let item of items" (click)="Establishments(item.id, item.nome)" >  
+    <ion-searchbar [(ngModel)]="terms" (change)="sort()" placeholder="Pesquisar"></ion-searchbar>
+    <ion-item *ngFor="let item of items | search : terms | sort: {property: column, order: order}" (click)="Establishments(item.id, item.nome)" >  
       <ion-grid>
         <ion-row>
           <ion-col col-11>{{item.nome}}</ion-col>

@@ -42,9 +42,16 @@ export class PlacesPage {
       { imagem: 'avatar3.png', usuario: 'Rafael', comentario: 'Tive dificuldade de encontrar' }
      
     ];
-    this.logado = false;
+    
+    var user = localStorage.getItem("user");
+    console.log(user);
+    if(user){
+      this.logado = true;
+    } else{
+      this.logado = false;
+    }
 
-    this.http.get("http://localhost:8000/establishments/"+this.id).map(res => res.json())
+    this.http.get("http://listfacil.com/api/public/establishments/"+this.id).map(res => res.json())
     .subscribe(data => {
       if(data.status == "true"){
         this.vazio = true;
@@ -59,7 +66,7 @@ export class PlacesPage {
       }else{
         this.vazio = false;
       }
-     
+
     }); 
 
     
@@ -67,8 +74,6 @@ export class PlacesPage {
  
 
   openModal() {
-    this.logado = true;
-
     const modal = this.modalCtrl.create(BasicPage);
     modal.present();
   }

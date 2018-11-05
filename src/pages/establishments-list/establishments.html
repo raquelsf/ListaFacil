@@ -7,9 +7,9 @@
 <ion-header>
 
   <ion-navbar>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>{{nome}}</ion-title>
   </ion-navbar>
 
@@ -19,16 +19,17 @@
 <ion-content padding>
 
   <ion-list *ngIf="vazio == false">
-    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+      <ion-searchbar [(ngModel)]="terms" (change)="sort()" placeholder="Pesquisar"></ion-searchbar>
+      <!-- <button ion-button type="button" (click)="sort()">Pesquisar</button> -->
 
-    <ion-item *ngFor="let item of items">
+    <ion-item *ngFor="let item of items | search : terms | sort: {property: column, order: order}" (click)="Establishments(item.id)">
       <ion-thumbnail item-start>
-        <img src="../../assets/imgs/{{item.imagem}}">
+        <img src="http://listfacil.com/api/public/images/{{item.imagem}}">
       </ion-thumbnail>
-      <h2>{{item.desc}}</h2>
-    <p>{{item.status}}</p>
-      <button ion-button clear item-end (click)="Establishments(item.id)">
-          <ion-icon name="arrow-forward"></ion-icon>
+      <h2>{{item.nome}}</h2>
+      <p>{{item.status}}</p>
+      <button ion-button clear item-end >
+        <ion-icon name="arrow-forward"></ion-icon>
       </button>
     </ion-item>
   </ion-list>

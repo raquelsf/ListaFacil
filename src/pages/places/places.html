@@ -15,7 +15,7 @@
 
 <ion-content>
     <ion-card>
-      <img src="../../assets/imgs/{{imagem}}">
+      <img src="http://listfacil.com/api/public/images/{{imagem}}">
       <ion-fab right top>
         <button ion-fab>
           <ion-icon name="ios-star-outline"></ion-icon>
@@ -65,7 +65,7 @@
         <ion-list *ngFor="let comentario of comentarios">
           <ion-item>
             <ion-avatar item-start>
-              <img src="../../assets/imgs/{{comentario.imagem}}">
+              <img src="http://listfacil.com/api/public/images/{{comentario.imagem}}">
             </ion-avatar>
             <h2>{{comentario.usuario}}</h2>
             <p>{{comentario.comentario}}</p>
@@ -81,7 +81,7 @@
         <ion-item>
           <ion-label stacked>Comentar</ion-label>
           <ion-avatar item-start>
-            <img src="../../assets/imgs/avatar3.png">
+            <img src="http://listfacil.com/api/public/images/avatar3.png">
           </ion-avatar>
           <ion-input type="text"></ion-input>
         </ion-item>
@@ -90,19 +90,12 @@
           <ion-grid>
               <ion-row col-12>
                 <ion-col col-12>
-                  <button ion-button icon-start class="instagram">
-                    <ion-icon name="logo-instagram"></ion-icon>
-                    Instagram
-                  </button>
-                  <button ion-button icon-start>
-                    <ion-icon name="logo-facebook"></ion-icon>
-                    Facebook
-                  </button>
+                    <ion-icon name="logo-instagram" class="instagram" large></ion-icon>
+                    <ion-icon name="logo-facebook" class="facebook" large></ion-icon>
                   <!-- <a href="{{instagram}}"><ion-icon name="logo-instagram"></ion-icon></a> -->
                 </ion-col>
               </ion-row>
             </ion-grid>
-        
       </ion-item>
     </ion-card>
 </ion-content>

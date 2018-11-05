@@ -21,13 +21,17 @@ export class EstablishmentsPage {
   id: any;
   nome: string;
   vazio: boolean;
-
+  descending: boolean = false;
+  order: number;
+  column: string = 'nome';
+  terms: string = '';
+  
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
     this.id = this.navParams.get('id');
     this.nome = this.navParams.get('nome');
   }
   ionViewDidLoad() {
-    this.http.get("http://localhost:8000/establishments/list/"+this.id).map(res => res.json())
+    this.http.get("http://listfacil.com/api/public/establishments/list/"+this.id).map(res => res.json())
     .subscribe(data => {
       if(data.status == "true"){
         this.vazio = false;
@@ -41,6 +45,9 @@ export class EstablishmentsPage {
   Establishments(id) {
     this.navCtrl.push(PlacesPage, {id: id});
   }
-  
+  sort(){
+    this.descending = !this.descending;
+    this.order = this.descending ? 1 : -1;
+  }
 
 }

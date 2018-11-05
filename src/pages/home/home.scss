@@ -1,32 +1,39 @@
 page-home {
     ion-grid {
         background : #e0e0e0;
+        height: 100%;
     }
+    ion-row {
+        padding: 50px;
+    }
+}
+
+.grid{
 }
 
 .card-background-page {
     ion-card {
-    color: grey;
-  
-    position: relative;
-    text-align: center;
+        color: grey;
+        position: relative;
+        text-align: center;
+        
     }
 
     .card-img{
     }
 
     .card-title {
-    font-size: 1.0em;
-    font-weight: bold;
-    color: rgb(0, 0, 0);
+        padding-top: 25%;
+        font-size: 1.2em;
+        font-weight: bold;
+        color: rgb(0, 0, 0);
     }
 
     .card-subtitle {
-    font-size: 1.0em;
-    position: absolute;
-    top: 52%;
-    width: 100%;
-    color: #fff;
+        font-size: 1.0em;
+        position: absolute;
+        top: 52%;
+        width: 100%;
+        color: #fff;
     }
-    
 }

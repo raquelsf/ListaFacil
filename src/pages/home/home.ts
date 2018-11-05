@@ -10,7 +10,7 @@ import 'rxjs/add/operator/map';
 })
 export class HomePage {
   items:  Array<string>;
-  private url: string = "http://localhost:8000/categories";  
+  private url: string = "http://listfacil.com/api/public/categories";  
   
   constructor(public navCtrl: NavController, public http: Http) {
     
