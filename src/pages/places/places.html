@@ -54,8 +54,9 @@
         <ion-grid>
           <ion-row col-12>
             <ion-col col-3></ion-col>
-            <ion-col col-6>
+            <ion-col col-6 (click)="call('031989924525')">
               <ion-icon name="ios-call-outline"></ion-icon> (31) 9 3921 - 2731
+              
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -81,7 +82,7 @@
         <ion-item>
           <ion-label stacked>Comentar</ion-label>
           <ion-avatar item-start>
-            <img src="http://listfacil.com/api/public/images/avatar3.png">
+            <img src="{{user.img}}">
           </ion-avatar>
           <ion-input type="text"></ion-input>
         </ion-item>

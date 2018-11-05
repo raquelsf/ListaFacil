@@ -19,6 +19,7 @@ import 'rxjs/add/operator/map';
   templateUrl: 'places.html',
 })
 export class PlacesPage {
+  user:any = {};
   id: any;
   comentarios: any;
   imagem: string;
@@ -43,11 +44,15 @@ export class PlacesPage {
      
     ];
     
-    var user = localStorage.getItem("user");
-    console.log(user);
-    if(user){
+    var userObj = JSON.parse(localStorage.getItem("user"));
+    console.log(userObj);
+    if(userObj){
       this.logado = true;
+      this.user = userObj;
+      this.user.img = 'https://graph.facebook.com/'+userObj.id+'/picture?type=small';
+
     } else{
+      this.user.img = 'http://listfacil.com/api/public/images/avatar3.png'
       this.logado = false;
     }
 

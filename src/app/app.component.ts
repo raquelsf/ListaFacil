@@ -8,6 +8,7 @@ import { ListPage } from '../pages/list/list';
 import { FavoritesPage } from '../pages/favorites/favorites';
 import { PromotionsPage } from '../pages/promotions/promotions';
 import { ConfigurationPage } from '../pages/configuration/configuration';
+import { AlertController } from 'ionic-angular';
 
 @Component({
   templateUrl: 'app.html'
@@ -19,7 +20,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any, icon: string}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private alertCtrl: AlertController,) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -28,9 +29,10 @@ export class MyApp {
       { title: 'Promoções', component: PromotionsPage, icon: 'logo-usd' },
       { title: 'Favoritos', component: FavoritesPage, icon: 'ios-star-outline' },
       { title: 'Configurações', component: ConfigurationPage, icon: 'md-settings' },
-      { title: 'Sair', component: ConfigurationPage, icon: 'md-settings' },
+      { title: 'Sair', component: HomePage, icon: 'md-settings' },
     ];
 
+    
   }
 
   initializeApp() {
@@ -43,8 +45,20 @@ export class MyApp {
   }
 
   openPage(page) {
+    if(page.title == 'Sair'){
+      let alert = this.alertCtrl.create({
+        title: 'Você foi desconectado',
+        subTitle: '',
+        buttons: ['Ok']
+      });
+      alert.present();
+      localStorage.clear();
+      this.nav.setRoot(page.component);
+    } else{
+      this.nav.setRoot(page.component);
+    }
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
   }
+  
 }

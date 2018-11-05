@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: 'login-modal.html'
 })
 export class BasicPage {
-  user:any = {};
+  
   userdata: string;
 
   constructor(
@@ -27,7 +27,6 @@ export class BasicPage {
     this.fb.login(['public_profile', 'email'])
     .then((res: FacebookLoginResponse) => {
       if(res.status === 'connected'){
-          this.user.img = 'https://graph.facebook.com/'+res.authResponse.userID+'/picture?type=round';
           this.getData(res.authResponse.accessToken);
           let alert = this.alertCtrl.create({
             title: 'Bem-Vindo '+this.userdata,

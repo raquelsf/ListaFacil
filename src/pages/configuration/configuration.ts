@@ -32,4 +32,5 @@ export class ConfigurationPage {
     modal.present();
   }
 
+ 
 }

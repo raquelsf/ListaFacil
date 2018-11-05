@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.mycompany.listafacil" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>listafacil</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content original-src="index.html" src="http://192.168.1.10:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -82,5 +82,14 @@
     <plugin name="cordova-plugin-splashscreen" spec="~4.0.1" />
     <plugin name="cordova-plugin-ionic-webview" spec="^1.1.11" />
     <allow-navigation href="http://192.168.1.10:8100" sessionid="0726d7f0" />
-    <engine name="android" spec="^7.0.0" />
+    <plugin name="cordova-plugin-facebook4" spec="^3.1.0">
+        <variable name="APP_ID" value="193788931512680" />
+        <variable name="APP_NAME" value="listafacil" />
+        <variable name="FACEBOOK_ANDROID_SDK_VERSION" value="4.37.0" />
+    </plugin>
+    <plugin name="cordova-plugin-browsertab" spec="^0.2.0" />
+    <plugin name="cordova-sqlite-storage" spec="^2.5.1" />
+    <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
+    <engine name="android" spec="7.0.0" />
+    <engine name="browser" spec="5.0.4" />
 </widget>
