@@ -2,9 +2,10 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { DbProvider } from '../providers/db/db';
+import { SQLite } from '@ionic-native/sqlite';
 
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { FavoritesPage } from '../pages/favorites/favorites';
 import { PromotionsPage } from '../pages/promotions/promotions';
 import { ConfigurationPage } from '../pages/configuration/configuration';
@@ -20,7 +21,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any, icon: string}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private alertCtrl: AlertController,) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private alertCtrl: AlertController, public dbAPI: DbProvider, public sqlite: SQLite,) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation

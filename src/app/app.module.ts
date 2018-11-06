@@ -24,6 +24,10 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { SearchPipe } from '../pipes/search/search';
 import { SortPipe } from '../pipes/sort/sort';
+
+import { DbProvider } from '../providers/db/db';
+import { SQLite } from '@ionic-native/sqlite';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -62,6 +66,8 @@ import { SortPipe } from '../pipes/sort/sort';
     StatusBar,
     SplashScreen,
     Facebook,
+    DbProvider,
+    SQLite,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
