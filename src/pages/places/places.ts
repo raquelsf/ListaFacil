@@ -4,7 +4,7 @@ import { BasicPage } from '../login/login-modal';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-
+// import { CallNumber } from '@ionic-native/call-number';
 /**
  * Generated class for the PlacesPage page.
  *
@@ -32,7 +32,12 @@ export class PlacesPage {
   facebook: string;
   vazio: boolean;
   logado: boolean;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public http: Http, 
+    public modalCtrl: ModalController
+    // private callNumber: CallNumber
+    ) {
     this.id = this.navParams.get('id');
   }
 
@@ -76,11 +81,15 @@ export class PlacesPage {
 
     
   }
- 
-
   openModal() {
     const modal = this.modalCtrl.create(BasicPage);
     modal.present();
   }
+
+  // call(number){
+  //   this.callNumber.callNumber("18001010101", true)
+  //   .then(res => console.log('Launched dialer!', res))
+  //   .catch(err => console.log('Error launching dialer', err));
+  // }
 }
 

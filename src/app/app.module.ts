@@ -25,6 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SearchPipe } from '../pipes/search/search';
 import { SortPipe } from '../pipes/sort/sort';
 
+import { UserProvider } from '../providers/user/user';
 import { DbProvider } from '../providers/db/db';
 import { SQLite } from '@ionic-native/sqlite';
 
@@ -67,6 +68,7 @@ import { SQLite } from '@ionic-native/sqlite';
     SplashScreen,
     Facebook,
     DbProvider,
+    UserProvider,
     SQLite,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

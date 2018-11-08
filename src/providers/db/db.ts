@@ -9,7 +9,7 @@ export class DbProvider {
   public database_schema =
     `
       CREATE TABLE IF NOT EXISTS tb_user(
-        cpf TEXT NOT NULL,
+        email TEXT NOT NULL,
         password TEXT NOT NULL
       )
     `
@@ -35,6 +35,7 @@ export class DbProvider {
   }
 
   insertDbValues(data){
+    console.log(data);
     this.getInstanceSQLite()
     .then(()=>{
       this.database.executeSql('INSERT INTO tb_user(email,password) VALUES(?,?);', [data.email, data.password])

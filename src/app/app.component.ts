@@ -3,13 +3,16 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { DbProvider } from '../providers/db/db';
-import { SQLite } from '@ionic-native/sqlite';
+import { UserProvider } from '../providers/user/user';
+
+import { SQLiteObject, SQLite } from '@ionic-native/sqlite';
 
 import { HomePage } from '../pages/home/home';
 import { FavoritesPage } from '../pages/favorites/favorites';
 import { PromotionsPage } from '../pages/promotions/promotions';
 import { ConfigurationPage } from '../pages/configuration/configuration';
 import { AlertController } from 'ionic-angular';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   templateUrl: 'app.html'
@@ -21,7 +24,41 @@ export class MyApp {
 
   pages: Array<{title: string, component: any, icon: string}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private alertCtrl: AlertController, public dbAPI: DbProvider, public sqlite: SQLite,) {
+  constructor(public platform: Platform, 
+    public statusBar: StatusBar, 
+    public splashScreen: SplashScreen,
+    private alertCtrl: AlertController, 
+    public dbAPI: DbProvider, 
+    public userAPI: UserProvider, 
+    public sqlite: SQLite,
+    private http: HttpClient
+    ) {
+    platform.ready().then(() => {
+      this.dbAPI.createDatabase();
+      let query = 'SELECT * from tb_user';
+      this.dbAPI.getInstanceSQLite().then((db: SQLiteObject) => {
+        db.executeSql(query, []).then((result) => {
+          if(result.rows.length > 0) {
+            let loginData:any = {
+              // 'client_id': '2',
+              // 'client_secret': 'WJSSSQU28mlLEgIxk2HaJpGuy2nKegYHJta8lTiX',
+              // 'grant_type': 'password',
+              'email': result.rows.item(0).email,
+              'password': result.rows.item(0).password,
+              // 'source': '2'
+            };
+            this.http.post("http://listfacil.com/api/public/login", loginData).subscribe(data => {
+              console.log(data);
+              this.userAPI.setUser(data)
+              // this.tokenAPI.setToken(res.token)
+              // this.tokenAPI.getDeviceToken(this.userAPI.getUser().id)
+            })
+          }else {
+            
+          }
+        })
+      })
+    });
     this.initializeApp();
 
     // used for an example of ngFor and navigation
