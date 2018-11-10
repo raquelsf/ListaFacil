@@ -9,13 +9,13 @@
 
 <ion-content class="card-background-page">
   <ion-grid>
-    <ion-row *ngFor="let item of items" (click)="SubCategories(item.id, item.nome)" >
-      <ion-col col-5> 
+    <ion-row *ngFor="let item of items" (click)="SubCategories(item.id, item.nome)">
+      <ion-col col-5 class="card-img"> 
         <img src="http://listfacil.com/api/public/images/{{item.imagem}}"/>
       </ion-col>
       <ion-col col-7>
         <div class="card-title">
-          {{item.nome}}
+            {{item.nome}}
         </div>
       </ion-col>
     </ion-row>

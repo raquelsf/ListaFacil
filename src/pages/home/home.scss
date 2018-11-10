@@ -1,10 +1,11 @@
 page-home {
     ion-grid {
-        background : #e0e0e0;
+        // background :rgb(238, 112, 112);
+        background-image: linear-gradient(rgb(190, 4, 17), rgb(248, 182, 182));
         height: 100%;
     }
     ion-row {
-        padding: 50px;
+        border-bottom: 1px solid #d5d5d5;
     }
 }
 
@@ -16,17 +17,17 @@ page-home {
         color: grey;
         position: relative;
         text-align: center;
-        
     }
 
     .card-img{
+       padding: 5%;
     }
 
     .card-title {
-        padding-top: 25%;
+        padding-top: 30%;
         font-size: 1.2em;
-        font-weight: bold;
-        color: rgb(0, 0, 0);
+        color: #fff;
+        text-transform: uppercase;
     }
 
     .card-subtitle {
