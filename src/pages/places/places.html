@@ -17,33 +17,41 @@
     <ion-card>
       <img src="http://listfacil.com/api/public/images/{{imagem}}">
       <ion-fab right top>
-        <button ion-fab>
+        <button ion-fab class="btn-gray" color="light" title="">
           <ion-icon name="heart-outline"></ion-icon>
         </button>
       </ion-fab>
     
-      <ion-item>
+      <ion-item style="border-bottom: 1px solid #d5d5d5;">
         <ion-icon name="ios-restaurant-outline" item-start large></ion-icon>
         <h2>{{nome}}</h2>
         <p>{{desc}}</p>
       </ion-item>
     
-      <ion-item>
+      <ion-item (click)="toggleAccordion()">
         <ion-icon name="ios-time-outline" item-start large ></ion-icon>
         <h2>{{status}}</h2>
-        <p>Funcionamento de {{aberto}} ás {{fechado}}</p>
+        <span>Funciona {{aberto}} ás {{fechado}}</span>
+        <ion-icon class="btn-red"  [name]="icon" ></ion-icon>
       </ion-item>
+      <ion-list [hidden]=!accordionExapanded>
+            <ion-item *ngFor="let horario of horarios">
+              <small>
+                  {{horario.dia}} - {{horario.aberto}} ás {{horario.fechado}}
+              </small>
+            </ion-item>
+      </ion-list>
       <ion-item>
         <ion-grid>
           <ion-row col-12>
             <ion-col col-3></ion-col>
             <ion-col col-6>
               <span item-start>
-                <ion-icon name="ios-star-outline" class="checked"></ion-icon>
-                <ion-icon name="ios-star-outline" class="checked"></ion-icon>
-                <ion-icon name="ios-star-outline" class="checked"></ion-icon>
-                <ion-icon name="ios-star-outline"></ion-icon>
-                <ion-icon name="ios-star-outline"></ion-icon>
+                <ion-icon name="ios-star" class="checked"></ion-icon>
+                <ion-icon name="ios-star" class="checked"></ion-icon>
+                <ion-icon name="ios-star" class="checked"></ion-icon>
+                <ion-icon name="ios-star"></ion-icon>
+                <ion-icon name="ios-star"></ion-icon>
               </span>
               <span item-start>(38)</span>
             </ion-col>

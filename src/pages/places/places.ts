@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, Renderer } from '@angular/core';
 import { ModalController } from 'ionic-angular';
 import { BasicPage } from '../login/login-modal';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { UserProvider } from '../../providers/user/user';
+
 // import { CallNumber } from '@ionic-native/call-number';
 /**
  * Generated class for the PlacesPage page.
@@ -19,7 +21,11 @@ import 'rxjs/add/operator/map';
   templateUrl: 'places.html',
 })
 export class PlacesPage {
-  user:any = {};
+  accordionExapanded = false;
+  icon: string = "ios-arrow-down";
+  horarios: any;
+
+  user : any;
   id: any;
   comentarios: any;
   imagem: string;
@@ -32,16 +38,20 @@ export class PlacesPage {
   facebook: string;
   vazio: boolean;
   logado: boolean;
+
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
     public http: Http, 
-    public modalCtrl: ModalController
+    public userAPI: UserProvider,
+    public modalCtrl: ModalController,
+    public renderer: Renderer
     // private callNumber: CallNumber
     ) {
     this.id = this.navParams.get('id');
   }
 
   ionViewDidLoad() {
+    this.accordionExapanded = false;
     this.comentarios = [
       { imagem: 'avatar1.png', usuario: 'Dillan Kenner', comentario: 'Amei o ambiente' },
       { imagem: 'avatar2.png', usuario: 'Joyce', comentario: 'Otimos Preços' },
@@ -49,7 +59,7 @@ export class PlacesPage {
      
     ];
     
-    var userObj = JSON.parse(localStorage.getItem("user"));
+    var userObj = this.userAPI.getUser();
     console.log(userObj);
     if(userObj){
       this.logado = true;
@@ -60,7 +70,7 @@ export class PlacesPage {
       this.user.img = 'http://listfacil.com/api/public/images/avatar3.png'
       this.logado = false;
     }
-
+    this.logado = false;
     this.http.get("http://listfacil.com/api/public/establishments/"+this.id).map(res => res.json())
     .subscribe(data => {
       if(data.status == "true"){
@@ -81,9 +91,20 @@ export class PlacesPage {
 
     
   }
+
   openModal() {
     const modal = this.modalCtrl.create(BasicPage);
     modal.present();
+  }
+
+  toggleAccordion() {
+    this.http.get("http://listfacil.com/api/public/schedules/list/select/"+this.id).map(res => res.json())
+    .subscribe(data => {
+      this.horarios = data.data;
+    }); 
+
+    this.accordionExapanded = !this.accordionExapanded;
+    this.icon = this.icon == "ios-arrow-down" ? "ios-arrow-up" : "ios-arrow-down";
   }
 
   // call(number){

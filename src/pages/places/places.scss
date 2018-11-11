@@ -12,3 +12,10 @@ page-places {
 .checked {
     color: orange;
 }
+
+.btn-red{
+    color: rgb(224, 53, 102);
+}
+.item-md ion-icon[item-left] + .item-inner, .item-md ion-icon[item-left] + .item-input, .item-md ion-icon[item-start] + .item-inner, .item-md ion-icon[item-start] + .item-input {
+    margin-left: 10px;
+}
