@@ -36,12 +36,9 @@ export class BasicPage {
     this.fb.login(['public_profile', 'email'])
     .then((res: FacebookLoginResponse) => {
       if(res.status === 'connected'){
-       
           this.getData(res.authResponse.accessToken);
           setTimeout( () => {
             this.http.post("http://listfacil.com/api/public/loginfb", this.userdata)
-            this.userdata = JSON.stringify(this.userdata);
-            
             setTimeout( () => {
               this.dbAPI.insertDbValues(this.userdata);
             }, 5000);
@@ -70,8 +67,8 @@ export class BasicPage {
   getData(access_token:string){
     let url = 'https:/graph.facebook.com/me?fields=id,name,first_name,last_name,email&access_token='+ access_token;
     this.http.get(url).subscribe(data => {
+      this.userAPI.setUser(data)
       this.userdata = data;
-      // localStorage.setItem("user", this.userdata);
     })
   }
   openModal(id) {
