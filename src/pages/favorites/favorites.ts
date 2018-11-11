@@ -3,6 +3,7 @@ import { PlacesPage } from '../places/places';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { UserProvider } from '../../providers/user/user';
 
 /**
  * Generated class for the favoritesPage page.
@@ -18,12 +19,13 @@ import 'rxjs/add/operator/map';
 })
 export class FavoritesPage {
   items:  Array<string>;
-  id: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
-    this.id = this.navParams.get('id');
+  user: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public userAPI: UserProvider,) {
+   
   }
   ionViewDidLoad() {
-    this.http.get("http://localhost:8000/establishments/favorites/"+this.id).map(res => res.json())
+    this.user = this.userAPI.getUser();
+    this.http.get("http://listfacil.com/api/public/establishments/favorites/"+this.user.id).map(res => res.json())
     .subscribe(data => {
       this.items = data.data;
     }); 
