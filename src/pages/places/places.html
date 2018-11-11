@@ -17,8 +17,8 @@
     <ion-card>
       <img src="http://listfacil.com/api/public/images/{{imagem}}">
       <ion-fab right top>
-        <button ion-fab class="btn-gray" color="light" title="">
-          <ion-icon name="heart-outline"></ion-icon>
+        <button ion-fab class="btn-red" color="light" title="Favoritar" (click)="addFavorito()">
+          <ion-icon [name]="favorito"></ion-icon>
         </button>
       </ion-fab>
     
@@ -75,7 +75,7 @@
         <ion-list *ngFor="let comentario of comentarios">
           <ion-item>
             <ion-avatar item-start>
-              <img src="http://listfacil.com/api/public/images/{{comentario.imagem}}">
+              <img src="{{comentario.imagem}}">
             </ion-avatar>
             <h2>{{comentario.usuario}}</h2>
             <p>{{comentario.comentario}}</p>
@@ -91,10 +91,11 @@
         <ion-item>
           <ion-label stacked>Comentar</ion-label>
           <ion-avatar item-start>
-            <img src="{{user.img}}">
+            <img src="{{user.imagem}}">
           </ion-avatar>
-          <ion-input type="text"></ion-input>
+          <ion-input type="text"  name="novoComentario" [(ngModel)]="novoComentario"></ion-input>
         </ion-item>
+        <button  (click)="addComentario()">Comentar</button>
       </ion-list>
       <ion-item> 
           <ion-grid>

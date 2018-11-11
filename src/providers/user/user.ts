@@ -5,7 +5,7 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 @Injectable()
 
 export class UserProvider {
-  public data_info: any = [{ }]
+  public data_info: any = [{}]
   public database_schema =
     `
       CREATE TABLE IF NOT EXISTS tb_user(
@@ -22,5 +22,9 @@ export class UserProvider {
 
   getUser(){
     return this.data_info; 
+  }
+
+  removeUser(){
+    this.data_info = {};
   }
 }

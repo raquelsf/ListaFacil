@@ -90,7 +90,7 @@ export class MyApp {
         buttons: ['Ok']
       });
       alert.present();
-      localStorage.clear();
+      this.userAPI.removeUser()
       this.nav.setRoot(page.component);
     } else{
       this.nav.setRoot(page.component);

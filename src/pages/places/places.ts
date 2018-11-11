@@ -24,7 +24,7 @@ export class PlacesPage {
   accordionExapanded = false;
   icon: string = "ios-arrow-down";
   horarios: any;
-
+  novoComentario: string;
   user : any;
   id: any;
   comentarios: any;
@@ -38,7 +38,7 @@ export class PlacesPage {
   facebook: string;
   vazio: boolean;
   logado: boolean;
-
+  favorito: any;
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
     public http: Http, 
@@ -52,25 +52,18 @@ export class PlacesPage {
 
   ionViewDidLoad() {
     this.accordionExapanded = false;
-    this.comentarios = [
-      { imagem: 'avatar1.png', usuario: 'Dillan Kenner', comentario: 'Amei o ambiente' },
-      { imagem: 'avatar2.png', usuario: 'Joyce', comentario: 'Otimos Preços' },
-      { imagem: 'avatar3.png', usuario: 'Rafael', comentario: 'Tive dificuldade de encontrar' }
-     
-    ];
-    
-    var userObj = this.userAPI.getUser();
-    console.log(userObj);
-    if(userObj){
+    this.favorito = 'heart-outline';
+ 
+    this.user = this.userAPI.getUser();
+    console.log("Usuário salvo"+this.user);
+    if(this.user.id){
       this.logado = true;
-      this.user = userObj;
-      this.user.img = 'https://graph.facebook.com/'+userObj.id+'/picture?type=small';
-
+      this.user = this.user;
     } else{
       this.user.img = 'http://listfacil.com/api/public/images/avatar3.png'
       this.logado = false;
     }
-    this.logado = false;
+
     this.http.get("http://listfacil.com/api/public/establishments/"+this.id).map(res => res.json())
     .subscribe(data => {
       if(data.status == "true"){
@@ -83,13 +76,17 @@ export class PlacesPage {
         this.fechado = data.data.fechado;
         this.instagram = data.data.instagram;
         this.facebook = data.data.facebook;
+        this.favorito = data.data.favorito;
       }else{
         this.vazio = false;
       }
 
     }); 
+    setTimeout( () => {
+      this.getFavoritos();
 
-    
+      this.getComentarios();
+    }, 5000);
   }
 
   openModal() {
@@ -107,6 +104,43 @@ export class PlacesPage {
     this.icon = this.icon == "ios-arrow-down" ? "ios-arrow-up" : "ios-arrow-down";
   }
 
+  addComentario(){
+    let data = {
+      'id_usuario': this.user.id ,'id_estabelecimento' : this.id, 'comentario' : this.novoComentario,
+    }
+    this.http.post("http://listfacil.com/api/public/comments", data).map(res => res.json())
+    .subscribe(res => {
+      console.log(res);
+    }); 
+
+    this.getComentarios();
+
+  }
+  addFavorito(){
+    let data = {
+      'id_usuario': this.user.id ,'id_estabelecimento' : this.id,
+    }
+    this.http.post("http://listfacil.com/api/public/establishments/favorites", data).map(res => res.json())
+    .subscribe(res => {
+      console.log(res);
+    }); 
+    this.favorito = 1;
+    this.getFavoritos();
+  }
+  getComentarios(){
+    this.http.get("http://listfacil.com/api/public/comments/list/select/"+this.id).map(res => res.json())
+    .subscribe(data => {
+      this.comentarios = data.data;
+    }); 
+  }
+
+  getFavoritos(){
+    if(this.favorito == 0){
+      this.favorito = 'heart-outline';
+    } else if(this.favorito == 1){
+      this.favorito = 'heart';
+    }
+  }
   // call(number){
   //   this.callNumber.callNumber("18001010101", true)
   //   .then(res => console.log('Launched dialer!', res))
