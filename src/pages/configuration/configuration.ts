@@ -18,7 +18,12 @@ import { UserProvider } from '../../providers/user/user';
 })
 export class ConfigurationPage {
   logado = true;
-  user;
+  user ={
+    imagem: 'http://listfacil.com/api/public/images/avatar3.png',
+    email: 'raquelsfreita@gmail.com',
+    senha: '12345',
+    nome: 'Raquel Freitas',
+  };
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public modalCtrl: ModalController,
@@ -26,14 +31,6 @@ export class ConfigurationPage {
   }
 
   ionViewDidLoad() {
-    this.logado = true;
-    this.user ={
-      imagem: 'http://listfacil.com/api/public/images/avatar3.png',
-      email: 'raquelsfreita@gmail.com',
-      senha: '12345',
-      nome: 'Raquel Freitas',
-    }
-
     // this.user = this.userAPI.getUser();
     // if(this.user.id){
     //   this.logado = true;
@@ -44,11 +41,23 @@ export class ConfigurationPage {
     // } else{
     //   this.logado = false;
     // }
+    this.user ={
+      imagem: 'http://listfacil.com/api/public/images/avatar3.png',
+      email: 'raquelsfreita@gmail.com',
+      senha: '12345',
+      nome: 'Raquel Freitas',
+    };
   }
 
 
 
 openModal() {
+    this.user ={
+      imagem: 'http://listfacil.com/api/public/images/avatar3.png',
+      email: 'raquelsfreita@gmail.com',
+      senha: '12345',
+      nome: 'Raquel Freitas',
+    };
     const modal = this.modalCtrl.create(BasicPage);
     modal.present();
   }
