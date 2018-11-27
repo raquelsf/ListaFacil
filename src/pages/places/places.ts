@@ -60,7 +60,7 @@ export class PlacesPage {
       this.logado = true;
       this.user = this.user;
     } else{
-      this.user.img = 'http://listfacil.com/api/public/images/avatar3.png'
+      this.user.imagem = 'http://listfacil.com/api/public/images/avatar3.png'
       this.logado = false;
     }
 

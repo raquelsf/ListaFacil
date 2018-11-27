@@ -7,6 +7,9 @@
 <ion-header>
 
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Configurações</ion-title>
   </ion-navbar>
 
@@ -16,6 +19,18 @@
 <ion-content padding>
   <ion-item *ngIf="logado == false" text-center>
     <p>É necessario estar logado para alterar seus dados. </p>
-    <p ><a (click)="openModal({id: id})">Clique aqui para logar</a></p>
+    <p><a (click)="openModal({id: id})">Clique aqui para logar</a></p>
   </ion-item>
+  <ion-list *ngIf="logado == true">
+    <ion-item>
+      <ion-label stacked>Seus Dados</ion-label>
+      <ion-avatar item-start>
+        <img src="{{user.imagem}}">
+      </ion-avatar>
+      <ion-input type="text" name="nome" [(ngModel)]="user.nome"></ion-input>
+      <ion-input type="text" name="email" [(ngModel)]="user.email"></ion-input>
+      <ion-input type="password" name="senha" [(ngModel)]="user.senha"></ion-input>
+    </ion-item>
+    <button class="ion-button outline" >Salvar</button>
+  </ion-list>
 </ion-content>
