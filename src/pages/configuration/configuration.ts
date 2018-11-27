@@ -17,8 +17,13 @@ import { UserProvider } from '../../providers/user/user';
   templateUrl: 'configuration.html',
 })
 export class ConfigurationPage {
-  logado = true;
-  user;
+  logado = false;
+  user = {
+    imagem: 'http://listfacil.com/api/public/images/avatar3.png',
+    email: 'raquelsfreita@gmail.com',
+    senha: '12345',
+    nome: 'Raquel Freitas',
+  }
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public modalCtrl: ModalController,
@@ -26,8 +31,7 @@ export class ConfigurationPage {
   }
 
   ionViewDidLoad() {
-    this.logado = true;
-    this.user ={
+    this.user = {
       imagem: 'http://listfacil.com/api/public/images/avatar3.png',
       email: 'raquelsfreita@gmail.com',
       senha: '12345',
