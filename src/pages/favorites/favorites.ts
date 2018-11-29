@@ -4,6 +4,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { UserProvider } from '../../providers/user/user';
+import { ModalController } from 'ionic-angular';
+import { BasicPage } from '../login/login-modal';
 
 /**
  * Generated class for the favoritesPage page.
@@ -20,20 +22,32 @@ import { UserProvider } from '../../providers/user/user';
 export class FavoritesPage {
   items:  Array<string>;
   user: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public userAPI: UserProvider,) {
-   
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public modalCtrl: ModalController,
+              public http: Http,
+              public userAPI: UserProvider,) {
+
   }
   ionViewDidLoad() {
     this.user = this.userAPI.getUser();
+
     this.http.get("http://listfacil.com/api/public/establishments/favorites/"+this.user.id).map(res => res.json())
     .subscribe(data => {
       this.items = data.data;
-    }); 
+    });
   }
-   
+
   Establishments(id) {
     this.navCtrl.push(PlacesPage, {id: id});
   }
-  
+
+
+  openModal() {
+    const modal = this.modalCtrl.create(BasicPage);
+    modal.present();
+  }
+
+
 
 }
