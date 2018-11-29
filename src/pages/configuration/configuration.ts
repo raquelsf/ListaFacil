@@ -17,13 +17,22 @@ import { UserProvider } from '../../providers/user/user';
   templateUrl: 'configuration.html',
 })
 export class ConfigurationPage {
+<<<<<<< HEAD
   logado = true;
   user ={
+=======
+  logado = false;
+  user = {
+>>>>>>> 31d01c17b91f01d31b585c44a2e4b69c217a0a31
     imagem: 'http://listfacil.com/api/public/images/avatar3.png',
     email: 'raquelsfreita@gmail.com',
     senha: '12345',
     nome: 'Raquel Freitas',
+<<<<<<< HEAD
   };
+=======
+  }
+>>>>>>> 31d01c17b91f01d31b585c44a2e4b69c217a0a31
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public modalCtrl: ModalController,
@@ -31,6 +40,16 @@ export class ConfigurationPage {
   }
 
   ionViewDidLoad() {
+<<<<<<< HEAD
+=======
+    this.user = {
+      imagem: 'http://listfacil.com/api/public/images/avatar3.png',
+      email: 'raquelsfreita@gmail.com',
+      senha: '12345',
+      nome: 'Raquel Freitas',
+    }
+
+>>>>>>> 31d01c17b91f01d31b585c44a2e4b69c217a0a31
     // this.user = this.userAPI.getUser();
     // if(this.user.id){
     //   this.logado = true;

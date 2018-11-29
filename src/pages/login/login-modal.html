@@ -1,41 +1,49 @@
 <ion-header>
-    <ion-toolbar>
-        <ion-title>
-        Entrar
-        </ion-title>
-        <ion-buttons start>
-        <button icon-only ion-button (click)="dismiss()">
-            <ion-icon name="md-close"></ion-icon>
-        </button>
-        </ion-buttons>
-    </ion-toolbar>
+  <ion-toolbar>
+    <ion-title>
+      Entrar
+    </ion-title>
+    <ion-buttons start>
+      <button icon-only ion-button (click)="dismiss()">
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content >
-    <ion-card>
-        <!-- <div text-center><h2>Lista Fácil</h2></div> -->
-        <img class="img" src="http://listfacil.com/api/public/images/logo2.png">
-        <ion-list>
-            <ion-item>
-                <ion-label>Usuário:</ion-label>
-                <ion-input type="text"></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label>Senha:</ion-label>
-                <ion-input type="password"></ion-input>
-            </ion-item>
-        </ion-list>
-        <div padding>
-            <button block ion-button (click)="login()">Entrar</button>
-        </div>
-        <div text-center>OU</div>
-        <div text-center>
-            <button ion-button icon-end (click)="loginFb()">
-                Entrar com Facebook
-                <ion-icon name="logo-facebook"></ion-icon>
-            </button>
-        </div>
-        <div padding></div>
-    </ion-card>
-   
+<ion-content>
+  <ion-card>
+    <!-- <div text-center><h2>Lista Fácil</h2></div> -->
+    <img class="img" src="http://listfacil.com/api/public/images/logo2.png">
+    <h5>Faça Login para ver mais! </h5>
+    <ion-list style="margin-top: 10px; border: #636b6f">
+      <ion-item>
+        <ion-label>Usuário:</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Senha:</ion-label>
+        <ion-input type="password"></ion-input>
+      </ion-item>
+      <div padding>
+        <button block ion-button outline  (click)="login()">Entrar</button>
+      </div>
+    </ion-list>
+
+    <div text-center>OU</div>
+    <div padding></div>
+
+    <div text-center>
+      <button ion-button icon-end (click)="loginFb()">
+        Entrar com Facebook
+        <ion-icon name="logo-facebook"></ion-icon>
+      </button>
+    </div>
+    <div padding></div>
+    <div text-center>
+      Ainda não está no Lista Fácil? <a>Cadastre aqui</a>
+    </div>
+    <div padding></div>
+  </ion-card>
+
 </ion-content>
