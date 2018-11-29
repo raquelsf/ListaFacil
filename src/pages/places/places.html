@@ -21,13 +21,13 @@
           <ion-icon [name]="favorito"></ion-icon>
         </button>
       </ion-fab>
-    
+
       <ion-item style="border-bottom: 1px solid #d5d5d5;">
         <ion-icon name="ios-restaurant-outline" item-start large></ion-icon>
         <h2>{{nome}}</h2>
         <p>{{desc}}</p>
       </ion-item>
-    
+
       <ion-item (click)="toggleAccordion()">
         <ion-icon name="ios-time-outline" item-start large ></ion-icon>
         <h2>{{status}}</h2>
@@ -65,11 +65,11 @@
             <ion-col col-6 >
               <!-- <ion-col col-6 (click)="call('031989924525')"> -->
               <ion-icon name="ios-call-outline"></ion-icon> (31) 9 3921 - 2731
-              
+
             </ion-col>
           </ion-row>
         </ion-grid>
-      </ion-item>  
+      </ion-item>
       <ion-item>
         <h2>Comentários</h2>
         <ion-list *ngFor="let comentario of comentarios">
@@ -85,7 +85,7 @@
       <ion-item *ngIf="logado == false" text-center>
         <p>É necessario estar logado para comentar. </p>
         <p ><a (click)="openModal({id: id})">Clique aqui para logar</a></p>
-        
+
       </ion-item>
       <ion-list *ngIf="logado == true">
         <ion-item>
@@ -97,15 +97,15 @@
         </ion-item>
         <button  (click)="addComentario()">Comentar</button>
       </ion-list>
-      <ion-item> 
-          <ion-grid>
+      <ion-item>
+          <ion-grid *ngIf="facebook || instagram">
               <ion-row>
                 <ion-col col-9>
                   <small>Veja mais de {{nome}} em:</small>
                 </ion-col>
                 <ion-col col-3>
-                  <ion-icon name="logo-instagram" class="social"></ion-icon>
-                  <ion-icon name="logo-facebook" class="social"></ion-icon>
+                  <ion-icon name="logo-instagram" class="instagram" *ngIf="instagram" (click)='OpenUrl(instagram);'style="font-size: 2.0em"></ion-icon>
+                  <ion-icon name="logo-facebook" class="facebook" *ngIf="facebook" (click)='OpenUrl(facebook);' style="font-size: 2.0em"></ion-icon>
                 </ion-col>
               </ion-row>
             </ion-grid>
