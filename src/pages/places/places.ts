@@ -5,6 +5,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { UserProvider } from '../../providers/user/user';
+import { Events } from 'ionic-angular';
 
 // import { CallNumber } from '@ionic-native/call-number';
 /**
@@ -39,21 +40,27 @@ export class PlacesPage {
   vazio: boolean;
   logado: boolean;
   favorito: any;
-  constructor(public navCtrl: NavController, 
-    public navParams: NavParams, 
-    public http: Http, 
+  rating: number = 4;
+
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public http: Http,
     public userAPI: UserProvider,
     public modalCtrl: ModalController,
-    public renderer: Renderer
+    public renderer: Renderer,
     // private callNumber: CallNumber
-    ) {
+    public events: Events) {
+      events.subscribe('star-rating:changed', (starRating) => {
+      console.log(starRating);
+      this.rating = starRating;
+    });
     this.id = this.navParams.get('id');
   }
 
   ionViewDidLoad() {
     this.accordionExapanded = false;
     this.favorito = 'heart-outline';
- 
+
     this.user = this.userAPI.getUser();
     console.log("Usuário salvo"+this.user);
     if(this.user.id){
@@ -81,7 +88,7 @@ export class PlacesPage {
         this.vazio = false;
       }
 
-    }); 
+    });
     setTimeout( () => {
       this.getFavoritos();
 
@@ -98,7 +105,7 @@ export class PlacesPage {
     this.http.get("http://listfacil.com/api/public/schedules/list/select/"+this.id).map(res => res.json())
     .subscribe(data => {
       this.horarios = data.data;
-    }); 
+    });
 
     this.accordionExapanded = !this.accordionExapanded;
     this.icon = this.icon == "ios-arrow-down" ? "ios-arrow-up" : "ios-arrow-down";
@@ -111,7 +118,7 @@ export class PlacesPage {
     this.http.post("http://listfacil.com/api/public/comments", data).map(res => res.json())
     .subscribe(res => {
       console.log(res);
-    }); 
+    });
 
     this.getComentarios();
 
@@ -123,7 +130,7 @@ export class PlacesPage {
     this.http.post("http://listfacil.com/api/public/establishments/favorites", data).map(res => res.json())
     .subscribe(res => {
       console.log(res);
-    }); 
+    });
     this.favorito = 1;
     this.getFavoritos();
   }
@@ -131,7 +138,7 @@ export class PlacesPage {
     this.http.get("http://listfacil.com/api/public/comments/list/select/"+this.id).map(res => res.json())
     .subscribe(data => {
       this.comentarios = data.data;
-    }); 
+    });
   }
 
   getFavoritos(){

@@ -29,6 +29,8 @@ import { UserProvider } from '../providers/user/user';
 import { DbProvider } from '../providers/db/db';
 import { SQLite } from '@ionic-native/sqlite';
 
+import { StarRatingModule } from 'ionic3-star-rating';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -46,6 +48,7 @@ import { SQLite } from '@ionic-native/sqlite';
   ],
   imports: [
     BrowserModule,
+    StarRatingModule,
     IonicModule.forRoot(MyApp),
     HttpModule,
     HttpClientModule,
