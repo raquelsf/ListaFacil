@@ -43,10 +43,8 @@
       </ion-list>
       <ion-item>
         <ion-grid>
-          <ion-row col-12>
-            <ion-col col-3></ion-col>
-            <ion-col col-6>
-              <ionic3-star-rating
+          <ion-row col-12 >
+              <ionic3-star-rating style="margin: 0 auto !important;"
                 activeIcon = "ios-star"
                 defaultIcon = "ios-star-outline"
                 activeColor = "#fff176"
@@ -54,8 +52,7 @@
                 readonly="false"
                 [rating]="rating">
               </ionic3-star-rating>
-              <!--<span item-start>(38)</span>-->
-            </ion-col>
+              <span item-start>({{totalRating}})</span>
           </ion-row>
         </ion-grid>
       </ion-item>
