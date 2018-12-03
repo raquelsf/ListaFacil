@@ -1,5 +1,5 @@
 import {Component, ViewChild, Renderer} from '@angular/core';
-import {ModalController} from 'ionic-angular';
+import {AlertController, ModalController} from 'ionic-angular';
 import {BasicPage} from '../login/login-modal';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {Http} from '@angular/http';
@@ -41,6 +41,8 @@ export class PlacesPage {
   logado: boolean;
   favorito: any;
   rating: number = 4;
+  telefone:string;
+  telefone2:string;
   totalRating: number = 0;
 
   constructor(public navCtrl: NavController,
@@ -49,6 +51,7 @@ export class PlacesPage {
               public userAPI: UserProvider,
               public modalCtrl: ModalController,
               public renderer: Renderer,
+              private alertCtrl: AlertController,
               // private callNumber: CallNumber
               public events: Events) {
 
@@ -86,7 +89,8 @@ export class PlacesPage {
           this.fechado = data.data.fechado;
           this.instagram = data.data.instagram;
           this.facebook = data.data.facebook;
-          this.favorito = data.data.favorito;
+          this.telefone = data.data.telefone;
+          this.telefone2 = data.data.telefone2;
         } else {
           this.vazio = false;
         }
@@ -129,15 +133,24 @@ export class PlacesPage {
   }
 
   addFavorito() {
-    let data = {
-      'id_usuario': this.user.id, 'id_estabelecimento': this.id,
-    }
-    this.http.post("http://listfacil.com/api/public/establishments/favorites", data).map(res => res.json())
-      .subscribe(res => {
-        console.log(res);
+    if(this.user.id){
+      let data = {
+        'id_usuario': this.user.id, 'id_estabelecimento': this.id,
+      }
+      this.http.post("http://listfacil.com/api/public/establishments/favorites", data).map(res => res.json())
+        .subscribe(res => {
+          console.log(res);
+        });
+      this.favorito = 1;
+      this.getFavoritos();
+    }else{
+      let alert = this.alertCtrl.create({
+        title: 'Você Precisa Estar logado para favoritar',
+        subTitle: '',
+        buttons: ['Ok']
       });
-    this.favorito = 1;
-    this.getFavoritos();
+      alert.present();
+    }
   }
 
   getComentarios() {
@@ -148,11 +161,14 @@ export class PlacesPage {
   }
 
   getFavoritos() {
-    if (this.favorito == 0) {
-      this.favorito = 'heart-outline';
-    } else if (this.favorito == 1) {
-      this.favorito = 'heart';
-    }
+    this.http.get("http://listfacil.com/api/public/favorite/" + this.id).map(res => res.json())
+      .subscribe(data => {
+        if (data.data == 0) {
+          this.favorito = 'heart-outline';
+        } else if (data.data == 1) {
+          this.favorito = 'heart';
+        }
+      });
   }
   getAvaliations() {
     this.http.get("http://listfacil.com/api/public/avaliations/" + this.id).map(res => res.json())

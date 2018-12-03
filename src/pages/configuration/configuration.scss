@@ -1,6 +1,25 @@
 page-configuration {
-  button{
-    margin-left: 35% !important;
+  ion-content{
+    button{
+      margin-left: 35% !important;
+    }
+  }
+  .img{
+    width: 30%;
+    margin: 0 auto;
+  }
+  .item-md ion-avatar ion-img, .item-md ion-avatar img {
+    border-radius: 50%;
+    overflow: hidden;
+    width: 60px;
+    height: 60px;
+  }
+
+  .item-label-stacked .text-input-md, .item-label-floating .text-input-md {
+    margin-left: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: calc(100% - 8px);
   }
 
   .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {

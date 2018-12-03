@@ -10,27 +10,29 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Configurações</ion-title>
+    <ion-title>Perfil</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <ion-item *ngIf="logado == false" text-center>
-    <p>É necessario estar logado para alterar seus dados. </p>
-    <p><a (click)="openModal({id: id})">Clique aqui para logar</a></p>
+  <ion-item text-center [hidden]="logado">
+    <p>É necessario se cadastrar e estar logado </p>
+   <p> para alterar seus dados.</p>
+    <p><a (click)="openModal({id: id})">Clique aqui para logar</a> ou faça seu cadastro:</p>
   </ion-item>
-  <ion-list *ngIf="logado == true">
+  <ion-list >
+    <!--<img class="img"  src="{{user.imagem}}" (click)="switchAvatar()" style="margin-top: 30px;">-->
     <ion-item>
-      <ion-label stacked>Seus Dados</ion-label>
       <ion-avatar item-start>
-        <img src="{{user.imagem}}">
+        <img  class="img" src="{{user.imagem}}" (click)="switchAvatar()">
       </ion-avatar>
-      <ion-input type="text" name="nome" [(ngModel)]="user.nome"></ion-input>
-      <ion-input type="text" name="email" [(ngModel)]="user.email"></ion-input>
-      <ion-input type="password" name="senha" [(ngModel)]="user.senha"></ion-input>
+      <ion-label stacked>Seus Dados</ion-label>
+      <ion-input type="text" name="name" placeholder="Nome" [(ngModel)]="user.name"></ion-input>
+      <ion-input type="text" name="email" placeholder="Email" [(ngModel)]="user.email"></ion-input>
+      <ion-input type="password" name="password" placeholder="Senha" [(ngModel)]="user.password"></ion-input>
     </ion-item>
-    <button ion-button outline round >Salvar</button>
+    <button ion-button outline round (click)="onSubmit()">Salvar</button>
   </ion-list>
 </ion-content>

@@ -17,12 +17,12 @@
 
 
 <ion-content padding>
-  <ion-list *ngIf="user == undefined">
+  <ion-list *ngIf="logado">
     <ion-item *ngFor="let item of items">
       <ion-thumbnail item-start>
         <img src="http://listfacil.com/api/public/images/{{item.imagem}}">
       </ion-thumbnail>
-      <h2>{{item.desc}}</h2>
+      <h2>{{item.nome}}</h2>
       <p>{{item.status}}</p>
       <button ion-button clear item-end (click)="Establishments(item.id)">
         <ion-icon name="arrow-forward"></ion-icon>
@@ -31,7 +31,7 @@
 
   </ion-list>
 
-  <ion-item *ngIf="user != undefined" text-center>
+  <ion-item *ngIf="!logado" text-center>
     <p>É necessario estar logado para alterar seus dados. </p>
     <p><a (click)="openModal({id: id})">Clique aqui para logar</a></p>
   </ion-item>

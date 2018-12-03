@@ -64,9 +64,9 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage, icon: 'ios-home-outline' },
-      { title: 'Promoções', component: PromotionsPage, icon: 'logo-usd' },
+      // { title: 'Promoções', component: PromotionsPage, icon: 'logo-usd' },
       { title: 'Favoritos', component: FavoritesPage, icon: 'ios-star-outline' },
-      { title: 'Configurações', component: ConfigurationPage, icon: 'md-settings' },
+      { title: 'Perfil', component: ConfigurationPage, icon: 'md-settings' },
       { title: 'Sair', component: HomePage, icon: 'ios-log-out-outline' },
     ];
 

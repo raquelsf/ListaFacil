@@ -62,7 +62,8 @@
             <ion-col col-3></ion-col>
             <ion-col col-6 >
               <!-- <ion-col col-6 (click)="call('031989924525')"> -->
-              <ion-icon name="ios-call-outline"></ion-icon> (31) 9 3921 - 2731
+              <ion-icon name="ios-call-outline"></ion-icon> <a href="tel:"{{telefone}}>{{telefone}}</a>
+              <ion-icon *ngIf="telefone2 != undefined" name="ios-call-outline"></ion-icon> <a *ngIf="telefone2 != undefined" href="tel:"{{telefone2}} >{{telefone2}}</a>
 
             </ion-col>
           </ion-row>

@@ -22,6 +22,7 @@ import { BasicPage } from '../login/login-modal';
 export class FavoritesPage {
   items:  Array<string>;
   user: any;
+  logado;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public modalCtrl: ModalController,
@@ -31,17 +32,26 @@ export class FavoritesPage {
   }
   ionViewDidLoad() {
     this.user = this.userAPI.getUser();
+    console.log(this.user);
 
-    this.http.get("http://listfacil.com/api/public/establishments/favorites/"+this.user.id).map(res => res.json())
-    .subscribe(data => {
-      this.items = data.data;
-    });
+    this.user = this.userAPI.getUser();
+    if (this.user.id) {
+      this.logado = true;
+
+      this.http.get("http://listfacil.com/api/public/establishments/favorites/"+this.user.id).map(res => res.json())
+        .subscribe(data => {
+          this.items = data.data;
+        });
+    } else {
+      this.logado = false;
+    }
+    console.log(this.user);
   }
+
 
   Establishments(id) {
     this.navCtrl.push(PlacesPage, {id: id});
   }
-
 
   openModal() {
     const modal = this.modalCtrl.create(BasicPage);
