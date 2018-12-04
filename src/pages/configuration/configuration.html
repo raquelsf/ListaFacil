@@ -19,47 +19,51 @@
 <ion-content padding>
   <ion-item text-center [hidden]="logado">
     <p>É necessario se cadastrar e estar logado </p>
-   <p> para alterar seus dados.</p>
+    <p> para alterar seus dados.</p>
     <p><a (click)="openModal({id: id})">Clique aqui para logar</a> ou faça seu cadastro:</p>
   </ion-item>
-  <ion-list >
-    <!--<img class="img"  src="{{user.imagem}}" (click)="switchAvatar()" style="margin-top: 30px;">-->
-    <ion-item>
-      <ion-avatar item-start>
-        <img  class="img" src="{{user.imagem}}" (click)="switchAvatar()">
-      </ion-avatar>
-      <ion-label stacked>Seus Dados</ion-label>
-      <ion-input type="text" name="name" placeholder="Nome" [(ngModel)]="user.name"  required minlength="4"  #name="ngModel"></ion-input>
-      <div *ngIf="name.invalid && (name.dirty || name.touched)"
-           class="alert alert-danger">
-        <div *ngIf="name.errors.required">
-          Informe um nome.
+  <ion-list>
+    <form #form="ngForm" (ngSubmit)="onSubmit()">
+      <!--<img class="img"  src="{{user.imagem}}" (click)="switchAvatar()" style="margin-top: 30px;">-->
+        <ion-avatar item-start>
+          <img class="img" src="{{user.imagem}}" (click)="switchAvatar()">
+        </ion-avatar>
+        <ion-label stacked>Seus Dados</ion-label>
+        <ion-input type="text" name="name" placeholder="Nome" [(ngModel)]="user.name" required minlength="4"
+                   #name="ngModel"></ion-input>
+
+        <div *ngIf="name.invalid && (name.dirty || name.touched)"
+             class="alert-danger">
+          <div *ngIf="name.errors.required">
+            Informe um nome.
+          </div>
+          <div *ngIf="name.errors.minlength">
+            Nome deve ter mais de 4 caracteres
+          </div>
         </div>
-        <div *ngIf="name.errors.minlength">
-         Nome deve ter mais de 4 caracteres
+        <ion-input type="text" name="email" placeholder="Email" [(ngModel)]="user.email" required minlength="4"
+                   #email="ngModel"></ion-input>
+        <div *ngIf="email.invalid && (email.dirty || email.touched)"
+             class="alert-danger">
+          <div *ngIf="email.errors.required">
+            Informe um Email.
+          </div>
+          <div *ngIf="email.errors.minlength">
+            Email deve ter mais de 4 caracteres
+          </div>
         </div>
-      </div>
-      <ion-input type="text" name="email" placeholder="Email" [(ngModel)]="user.email"  required minlength="4"  #email="ngModel"></ion-input>
-      <div *ngIf="email.invalid && (email.dirty || email.touched)"
-           class="alert alert-danger">
-        <div *ngIf="email.errors.required">
-          Informe um Email.
+        <ion-input type="password" name="password" placeholder="Senha" [(ngModel)]="user.password" required
+                   minlength="6" #password="ngModel"></ion-input>
+        <div *ngIf="password.invalid && (password.dirty || password.touched)"
+             class="alert-danger">
+          <div *ngIf="password.errors.required">
+            Informe uma Senha.
+          </div>
+          <div *ngIf="password.errors.minlength">
+            Senha deve ter mais de 6 caracteres
+          </div>
         </div>
-        <div *ngIf="email.errors.minlength">
-          Email deve ter mais de 4 caracteres
-        </div>
-      </div>
-      <ion-input type="password" name="password" placeholder="Senha" [(ngModel)]="user.password"  required minlength="6"  #password="ngModel"></ion-input>
-      <div *ngIf="password.invalid && (password.dirty || password.touched)"
-           class="alert alert-danger">
-        <div *ngIf="password.errors.required">
-          Informe um Senha.
-        </div>
-        <div *ngIf="password.errors.minlength">
-          Senha deve ter mais de 6 caracteres
-        </div>
-      </div>
-    </ion-item>
-    <button ion-button outline round (click)="onSubmit()">Salvar</button>
+      <button ion-button outline round type="submit" [disabled]="!form.valid">Salvar</button>
+    </form>
   </ion-list>
 </ion-content>
