@@ -98,10 +98,9 @@ export class PlacesPage {
       });
     setTimeout(() => {
       this.getFavoritos();
-
       this.getComentarios();
       this.getAvaliations();
-    }, 4000);
+    }, 3000);
   }
 
   openModal() {
@@ -141,7 +140,7 @@ export class PlacesPage {
         .subscribe(res => {
           console.log(res);
         });
-      this.favorito = 1;
+      this.favorito = 'heart';
       this.getFavoritos();
     }else{
       let alert = this.alertCtrl.create({
@@ -161,7 +160,8 @@ export class PlacesPage {
   }
 
   getFavoritos() {
-    this.http.get("http://listfacil.com/api/public/favorite/" + this.id).map(res => res.json())
+    console.log(this.id);
+    this.http.get("http://listfacil.com/api/public/establishments/favorite/"+this.id +"/"+this.user.id).map(res => res.json())
       .subscribe(data => {
         if (data.data == 0) {
           this.favorito = 'heart-outline';
@@ -186,6 +186,7 @@ export class PlacesPage {
     this.http.post("http://listfacil.com/api/public/avaliations", data).map(res => res.json())
       .subscribe(res => {
         console.log(res);
+        this.getAvaliations();
       });
   }
   // call(number){
