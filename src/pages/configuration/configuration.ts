@@ -21,7 +21,7 @@ import {DbProvider} from "../../providers/db/db";
 export class ConfigurationPage {
   logado;
   user: any = {};
-
+  name;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public modalCtrl: ModalController,
