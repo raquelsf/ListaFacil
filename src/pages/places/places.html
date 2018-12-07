@@ -91,9 +91,9 @@
           <ion-avatar item-start>
             <img src="{{user.imagem}}">
           </ion-avatar>
-          <ion-input type="text"  name="novoComentario" [(ngModel)]="novoComentario"></ion-input>
+          <ion-input type="text"  name="novoComentario" [(ngModel)]="novoComentario" (keyup.enter)="addComentario()"></ion-input>
         </ion-item>
-        <button  (click)="addComentario()">Comentar</button>
+        <button ion-button outline round (click)="addComentario()">Comentar</button>
       </ion-list>
       <ion-item>
           <ion-grid *ngIf="facebook || instagram">

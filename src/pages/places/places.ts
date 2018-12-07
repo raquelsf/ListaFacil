@@ -127,7 +127,12 @@ export class PlacesPage {
         console.log(res);
       });
 
-    this.getComentarios();
+    let comment = {
+      'usuario': this.user.name, 'imagem': this.user.imagem, 'comentario': this.novoComentario,
+    }
+    this.comentarios.push(comment);
+    console.log(this.comentarios);
+    // this.getComentarios();
 
   }
 
